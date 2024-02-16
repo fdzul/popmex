@@ -15,7 +15,7 @@ Authors@R: c(person(given = "Felipe Antonio",
 Maintainer: The package maintainer <felie.dzul.m@gmail.com>
 Description: The goal of the popmex package is to provide spatial population dataset at different levels of resolution.
 License: MIT + file LICENSE
-URL: https://github.com/fdzul/densnv, https://fdzul.github.io/popmex/
+URL: https://github.com/fdzul/popmex, https://fdzul.github.io/popmex/
 BugReports: https://github.com/fdzul/popmex/issues
 Encoding: UTF-8
 LazyData: true

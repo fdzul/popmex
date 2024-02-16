@@ -1,12 +1,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# popmex
+# popmex <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 <!-- badges: start -->
 <!-- badges: end -->
-
-<img align="center" src="man/figures/logo.png" alt="logo" width="140">
 
 The goal of the popmex package is to provide spatial population dataset
 at different levels of resolution.
