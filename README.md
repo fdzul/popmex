@@ -11,7 +11,11 @@
 The goal of the popmex package is to provide spatial population dataset
 at different levels of resolution.
 
-- 
+- hdx_pop2023. Population Density for 400m H3 Hexagons of Mexico for
+  2022
+
+- hdx_pop2023. Population Density for 400m H3 Hexagons of Mexico for
+  2023.
 
 ## Installation
 
