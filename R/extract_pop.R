@@ -19,6 +19,12 @@ extract_pop <- function(year, cve_edo, locality){
         y <- rgeomex::extract_locality(cve_edo = cve_edo,
                                        locality = locality)
         popmex::hdx_pop2022[y,]
+    } else if(year == 2021){
+        y <- rgeomex::extract_locality(cve_edo = cve_edo,
+                                       locality = locality)
+        popmex::hdx_pop2021[y,]
+    } else if(year == 2020){
+
     } else{}
 
 }
