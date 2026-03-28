@@ -4,16 +4,29 @@
 # popmex <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 The goal of the popmex package is to provide spatial population dataset
 at different levels of resolution.
 
 - hdx_pop2023. Population Density for 400m H3 Hexagons of Mexico for
-  2022
+  2023
 
-- hdx_pop2023. Population Density for 400m H3 Hexagons of Mexico for
-  2023.
+- hdx_pop2022. Population Density for 400m H3 Hexagons of Mexico for
+  2022.
+
+- hdx_pop2021. Population Density for 400m H3 Hexagons of Mexico for
+  2021.
+
+- LandScan from 2000 to 2024.
+
+LandScan (<https://landscan.ornl.gov>) is a globally recognized,
+R&D100-winning population data platform developed at Oak Ridge National
+Laboratory (ORNL). Its datasets provide human population distribution
+estimates down to 100 meter grid resolution. LandScan supports disaster
+response, humanitarian aid, environmental analysis, and urban planning
+by providing insights into where people live and how they move.
 
 ## Installation
 
