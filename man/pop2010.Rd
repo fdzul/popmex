@@ -6,7 +6,7 @@
 \title{population by municipality (ITER 2010).}
 \format{
 ## `pop2010`
-A data frame with 2469 rows and 44 columns:
+A data frame with 2456 rows and 44 columns:
 \describe{
   \item{CVEGEO}{id of the municipality.}
   \item{pobtot}{population}
