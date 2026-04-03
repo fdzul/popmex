@@ -190,3 +190,44 @@
 #'
 #' @source <https://www.inegi.org.mx/app/scitel/Default?ev=9>
 "pop2000"
+
+
+#' Conapo 1990-2040.
+#'
+#' Reconstruction and projections of the population of the municipalities of Mexico 1990-2040
+#' dataset ...
+#'
+#' @format ## `conapop`
+#' A data frame with 252450 rows and 24 columns:
+#' \describe{
+#'   \item{CVEGEO}{id of the municipality.}
+#'   \item{nom_ent}{name of state}
+#'   \item{nom_mun}{name of municipality}
+#'   \item{sex}{sex}
+#'   \item{ano}{year}
+#'   \item{pob_00_04}{total reconstructed and adjusted population from 0 to 4 years}
+#'   \item{pob_05_09}{total reconstructed and adjusted population from 5 to 9 years}
+#'   \item{pob_10_14}{total reconstructed and adjusted population from 10 to 14 years}
+#'   \item{pob_15_19}{total reconstructed and adjusted population from 15 to 19 years}
+#'   \item{pob_20_24}{total reconstructed and adjusted population from 20 to 24 years}
+#'   \item{pob_25_29}{total reconstructed and adjusted population from 25 to 29 years}
+#'   \item{pob_30_34}{total reconstructed and adjusted population from 30 to 34 years}
+#'   \item{pob_35_39}{total reconstructed and adjusted population from 35 to 39 years}
+#'   \item{pob_40_44}{total reconstructed and adjusted population from 40 to 44 years}
+#'   \item{pob_45_49}{total reconstructed and adjusted population from 45 to 49 years
+#'   \item{pob_50_54}{total reconstructed and adjusted population from 50 to 54 years}
+#'   \item{pob_55_59}{total reconstructed and adjusted population from 55 to 59 years}
+#'   \item{pob_60_64}{total reconstructed and adjusted population from 60 to 64 years}
+#'   \item{pob_65_69}{total reconstructed and adjusted population from 65 to 69 years}
+#'   \item{pob_70_74}{total reconstructed and adjusted population from 70 to 74 years}
+#'   \item{pob_75_79}{total reconstructed and adjusted population from 75 to 79 years}
+#'   \item{pob_80_84}{total reconstructed and adjusted population from 80 to 84 years}
+#'   \item{pob_85_mm}{Total reconstructed and adjusted population aged 85 and over}
+#'   \item{pob_total}{Total reconstructed and adjusted population}
+#'   ...
+#' }
+#' @details
+#' Mid-year population figures are presented for 2,475 municipalities in Mexico, from 1990 to 2020, and population projections from 2021 to 2040.
+#'
+#' @source <https://www.gob.mx/conapo/documentos/reconstruccion-y-proyecciones-de-la-poblacion-de-los-municipios-de-mexico-1990-2040>
+"conapop"
