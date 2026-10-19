@@ -24,17 +24,22 @@ Authors@R: c(person(given = "Felipe Antonio",
                         role = c("ctb"),
                         email = "fabiancorrea@msn.com",
                         comment = c(ORCID = "https://orcid.org/0000-0002-6193-1242")))
-Maintainer: The package maintainer <felie.dzul.m@gmail.com>
 Description: The goal of the popmex package is to provide spatial population dataset at different levels of resolution.
 License: MIT + file LICENSE
 URL: https://github.com/fdzul/popmex, https://fdzul.github.io/popmex/
 BugReports: https://github.com/fdzul/popmex/issues
 Encoding: UTF-8
 LazyData: true
-Depends: 
+Depends:
     R (>= 3.5)
 RoxygenNote: 7.3.3
-Suggests: 
+Suggests:
     knitr,
-    rmarkdown
+    rmarkdown,
+    cowplot,
+    ggplot2,
+    ggspatial,
+    leafsync,
+    mapview,
+    patchwork
 VignetteBuilder: knitr
