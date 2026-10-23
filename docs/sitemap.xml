@@ -1,19 +1,21 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
-<url><loc>/404.html</loc></url>
-<url><loc>/LICENSE-text.html</loc></url>
-<url><loc>/LICENSE.html</loc></url>
-<url><loc>/articles/index.html</loc></url>
-<url><loc>/articles/pop_urban_city.html</loc></url>
-<url><loc>/authors.html</loc></url>
-<url><loc>/index.html</loc></url>
-<url><loc>/reference/conapop.html</loc></url>
-<url><loc>/reference/extract_pop.html</loc></url>
-<url><loc>/reference/hdx_pop2021.html</loc></url>
-<url><loc>/reference/hdx_pop2022.html</loc></url>
-<url><loc>/reference/hdx_pop2023.html</loc></url>
-<url><loc>/reference/index.html</loc></url>
-<url><loc>/reference/pop2000.html</loc></url>
-<url><loc>/reference/pop2010.html</loc></url>
-<url><loc>/reference/pop2020.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/404.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/LICENSE-text.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/LICENSE.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/README.es.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/articles/index.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/articles/pop_urban_city.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/authors.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/index.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/news/index.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/reference/conapop.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/reference/extract_pop.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/reference/hdx_pop2021.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/reference/hdx_pop2022.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/reference/hdx_pop2023.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/reference/index.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/reference/pop2000.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/reference/pop2010.html</loc></url>
+<url><loc>https://fdzul.github.io/popmex/reference/pop2020.html</loc></url>
 </urlset>
 

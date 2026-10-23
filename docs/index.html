@@ -4,143 +4,242 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Population Density Mexico • popmex</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Population Datasets of Mexico at Municipal and Hexagon Resolution • popmex</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="icon" sizes="any" href="favicon.ico">
 <link rel="manifest" href="site.webmanifest">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Population Density Mexico">
-<meta property="og:description" content="The goal of the popmex package is to provide spatial population dataset at different levels of resolution.">
-<meta property="og:image" content="/logo.png">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Population Datasets of Mexico at Municipal and Hexagon Resolution">
+<meta name="description" content="Population datasets of Mexico for epidemiological analysis and to calculate rates: census population by municipality, sex and age group (INEGI ITER 2000, 2010 and 2020), municipal population reconstructions and projections 1990-2040 (CONAPO), and population in 400 m H3 hexagons (Kontur, Humanitarian Data Exchange, 2021-2023), with a function to extract the hexagons of urban localities.">
+<meta property="og:description" content="Population datasets of Mexico for epidemiological analysis and to calculate rates: census population by municipality, sex and age group (INEGI ITER 2000, 2010 and 2020), municipal population reconstructions and projections 1990-2040 (CONAPO), and population in 400 m H3 hexagons (Kontur, Humanitarian Data Exchange, 2021-2023), with a function to extract the hexagons of urban localities.">
+<meta property="og:image" content="https://fdzul.github.io/popmex/logo.png">
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <div class="container template-home">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">popmex</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
-      </span>
-    </div>
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Articles
+    <a class="navbar-brand me-2" href="index.html">popmex</a>
 
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/pop_urban_city.html">Extract and Visualize the Population of an Urban City</a>
-    </li>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="articles/pop_urban_city.html">Extract and Visualize the Population of an Urban City</a></li>
   </ul>
 </li>
+<li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/fdzul/popmex/" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
-
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://fdzul.r-universe.dev">dengueverse</a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/fdzul/popmex/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
-
-
-
-      </header><div class="row">
-  <div class="contents col-md-9">
+</nav><div class="container template-home">
+<div class="row">
+  <main id="main" class="col-md-9"><p><strong>English</strong> · <a href="README.es.html">Español</a></p>
 <div class="section level1">
-<div class="page-header"><h1 id="popmex-">popmex <img src="reference/figures/logo.png" align="right" height="139" alt=""><a class="anchor" aria-label="anchor" href="#popmex-"></a>
-</h1></div>
+<div class="page-header">
+<img src="logo.png" class="logo" alt=""><h1 id="popmex-">popmex <a class="anchor" aria-label="anchor" href="#popmex-"></a>
+</h1>
+</div>
 <!-- badges: start -->
-<!-- badges: end -->
-<p>The goal of the popmex package is to provide spatial population dataset at different levels of resolution.</p>
-<ul>
-<li><p>hdx_pop2023. Population Density for 400m H3 Hexagons of Mexico for 2023</p></li>
-<li>
-<p>hdx_pop2022. Population Density for 400m H3 Hexagons of Mexico for</p>
-<ol start="2022" style="list-style-type: decimal"><li>
-</li></ol>
-</li>
-<li>
-<p>hdx_pop2021. Population Density for 400m H3 Hexagons of Mexico for</p>
-<ol start="2021" style="list-style-type: decimal"><li>
-</li></ol>
-</li>
-<li><p>LandScan. 2003-2024.</p></li>
-</ul>
-<p>LandScan (<a href="https://landscan.ornl.gov" class="external-link uri">https://landscan.ornl.gov</a>) is a globally recognized, R&amp;D100-winning population data platform developed at Oak Ridge National Laboratory (ORNL). Its datasets provide human population distribution estimates down to 100 meter grid resolution. LandScan supports disaster response, humanitarian aid, environmental analysis, and urban planning by providing insights into where people live and how they move.</p>
-<ul>
-<li><p>pop2020. Population by municipality from ITER 2020.</p></li>
-<li><p>pop2010. Population by municipality from ITER 2010.</p></li>
-</ul>
-<p>The population data by total number and sex for each municipality were obtained from the dataset of territorial indicators known as ITER (Indicadores Territoriales), which is a database derived from the 2020 Population and Housing Census generated by Instituto Nacional de Estadística y Geografía of Mexico (<a href="https://www.inegi.org.mx/app/scitel/Default?ev=9" class="external-link">INEGI</a>).</p>
+
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p>popmex provides population datasets of Mexico at municipal and hexagon (400 m) resolution, to calculate incidence rates and to map where people live in urban localities.</p>
+<p>Population is the denominator of every rate and the exposure of every spatial model. popmex gathers in one place the census population by municipality, sex and age group (INEGI 2000, 2010 and 2020), the CONAPO reconstructions and projections for 1990-2040, and the population in 400 m H3 hexagons (Kontur 2021-2023) to work inside cities.</p>
+<p>popmex is part of the <a href="https://fdzul.r-universe.dev" class="external-link"><strong>dengueverse</strong></a>, a family of R packages for the surveillance, spatial analysis and control of dengue and other <em>Aedes</em>-borne diseases in Mexico.</p>
+</div>
+<div class="section level2">
+<h2 id="datasets">Datasets<a class="anchor" aria-label="anchor" href="#datasets"></a>
+</h2>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr>
+<th align="left">Dataset</th>
+<th align="left">Description</th>
+<th align="left">Source</th>
+</tr></thead>
+<tbody>
+<tr>
+<td align="left"><a href="https://fdzul.github.io/popmex/reference/conapop.html"><code>conapop</code></a></td>
+<td align="left">Population of the municipalities of Mexico, 1990-2040 (CONAPO)</td>
+<td align="left"><a href="https://www.gob.mx/conapo/documentos/reconstruccion-y-proyecciones-de-la-poblacion-de-los-municipios-de-mexico-1990-2040" class="external-link">link</a></td>
+</tr>
+<tr>
+<td align="left"><a href="https://fdzul.github.io/popmex/reference/hdx_pop2021.html"><code>hdx_pop2021</code></a></td>
+<td align="left">Population in 400 m H3 hexagons of Mexico, 2021 (Kontur / HDX)</td>
+<td align="left"><a href="https://data.humdata.org/dataset/kontur-population-mexico" class="external-link">link</a></td>
+</tr>
+<tr>
+<td align="left"><a href="https://fdzul.github.io/popmex/reference/hdx_pop2022.html"><code>hdx_pop2022</code></a></td>
+<td align="left">Population in 400 m H3 hexagons of Mexico, 2022 (Kontur / HDX)</td>
+<td align="left"><a href="https://data.humdata.org/dataset/kontur-population-mexico" class="external-link">link</a></td>
+</tr>
+<tr>
+<td align="left"><a href="https://fdzul.github.io/popmex/reference/hdx_pop2023.html"><code>hdx_pop2023</code></a></td>
+<td align="left">Population in 400 m H3 hexagons of Mexico, 2023 (Kontur / HDX)</td>
+<td align="left"><a href="https://data.humdata.org/dataset/kontur-population-mexico" class="external-link">link</a></td>
+</tr>
+<tr>
+<td align="left"><a href="https://fdzul.github.io/popmex/reference/pop2000.html"><code>pop2000</code></a></td>
+<td align="left">Population by municipality of Mexico, ITER 2000</td>
+<td align="left"><a href="https://www.inegi.org.mx/app/scitel/Default?ev=9" class="external-link">link</a></td>
+</tr>
+<tr>
+<td align="left"><a href="https://fdzul.github.io/popmex/reference/pop2010.html"><code>pop2010</code></a></td>
+<td align="left">Population by municipality of Mexico, ITER 2010</td>
+<td align="left"><a href="https://www.inegi.org.mx/app/scitel/Default?ev=9" class="external-link">link</a></td>
+</tr>
+<tr>
+<td align="left"><a href="https://fdzul.github.io/popmex/reference/pop2020.html"><code>pop2020</code></a></td>
+<td align="left">Population by municipality of Mexico, ITER 2020</td>
+<td align="left"><a href="https://www.inegi.org.mx/app/scitel/Default?ev=9" class="external-link">link</a></td>
+</tr>
+</tbody>
+</table>
+<p>See the full description of each dataset with <code><a href="https://rdrr.io/r/base/name.html" class="external-link">?name</a></code>.</p>
+</div>
+<div class="section level2">
+<h2 id="main-functions">Main functions<a class="anchor" aria-label="anchor" href="#main-functions"></a>
+</h2>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr>
+<th align="left">Function</th>
+<th align="left">Description</th>
+</tr></thead>
+<tbody><tr>
+<td align="left"><a href="https://fdzul.github.io/popmex/reference/extract_pop.html"><code>extract_pop()</code></a></td>
+<td align="left">Extract the population of a locality in 400 m H3 hexagons</td>
+</tr></tbody>
+</table>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>The development version of the densnv package is hosted on <a href="https://github.com/" class="external-link">GitHub</a> and can be installed in R with several packages: <a href="https://devtools.r-lib.org" class="external-link">devtools</a>, <a href="https://remotes.r-lib.org" class="external-link">remotes</a>, <a href="https://rstudio.github.io/renv/articles/renv.html" class="external-link">renv</a> and <a href="https://pak.%20r-lib.org" class="external-link">pak</a>.</p>
+<p>Install the released version from the <a href="https://fdzul.r-universe.dev" class="external-link">dengueverse R-universe</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"popmex"</span>,</span>
+<span>                 repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://fdzul.r-universe.dev"</span>,</span>
+<span>                           <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Or the development version from <a href="https://github.com/fdzul/popmex" class="external-link">GitHub</a>:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
-<span><span class="co">#pak::pkg_install("fdzul/popmex")</span></span></code></pre></div>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"fdzul/popmex"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="credits">Credits<a class="anchor" aria-label="anchor" href="#credits"></a>
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>The spatial dataset provided in the package were accessed from the HUMANITARIAN DATA EXCHANGE [HDX] page (<a href="https://data.humdata.org" class="external-link uri">https://data.humdata.org</a>)</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fdzul/popmex" class="external-link">popmex</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># population in 400 m hexagons of the metropolitan area of Mérida, 2023</span></span>
+<span><span class="va">merida</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/extract_pop.html">extract_pop</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2023</span>, cve_edo <span class="op">=</span> <span class="st">"31"</span>,</span>
+<span>                      locality <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Merida"</span>, <span class="st">"Uman"</span>, <span class="st">"Kanasin"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">merida</span><span class="op">$</span><span class="va">population</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># census population of each municipality in 2020 (denominator of rates)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pop2020</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CVEGEO"</span>, <span class="st">"pobtot"</span>, <span class="st">"pobfem"</span>, <span class="st">"pobmas"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<p>Longer examples are in the <a href="https://fdzul.github.io/popmex/articles/">articles</a> of the website.</p>
+</div>
+<div class="section level2">
+<h2 id="data-sources">Data sources<a class="anchor" aria-label="anchor" href="#data-sources"></a>
+</h2>
+<ul>
+<li>
+<strong>Kontur Population</strong> (<code>hdx_pop2021</code>, <code>hdx_pop2022</code>, <code>hdx_pop2023</code>), published in the <a href="https://data.humdata.org/dataset/kontur-population-mexico" class="external-link">Humanitarian Data Exchange</a>. License: CC BY 4.0.</li>
+<li>
+<strong>ITER, Censos de Población y Vivienda 2000, 2010 y 2020</strong> (<code>pop2000</code>, <code>pop2010</code>, <code>pop2020</code>), <a href="https://www.inegi.org.mx/app/scitel/Default?ev=9" class="external-link">INEGI</a>. Population columns converted to numeric; totals checked against INEGI.</li>
+<li>
+<strong>Reconstrucción y proyecciones de la población de los municipios de México 1990-2040</strong> (<code>conapop</code>), <a href="https://www.gob.mx/conapo/documentos/reconstruccion-y-proyecciones-de-la-poblacion-de-los-municipios-de-mexico-1990-2040" class="external-link">CONAPO</a>.</li>
+</ul>
+<p>Processing scripts are in <a href="https://github.com/fdzul/popmex/tree/main/data-raw" class="external-link"><code>data-raw/</code></a>.</p>
+</div>
+<div class="section level2">
+<h2 id="how-to-cite">How to cite<a class="anchor" aria-label="anchor" href="#how-to-cite"></a>
+</h2>
+<p>If you use popmex in a publication, please cite it:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>Warning <span class="cf">in</span> <span class="fu">person1</span>(<span class="at">given =</span> given[[i]], <span class="at">family =</span> family[[i]], <span class="at">middle =</span> middle[[i]], <span class="sc">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>Invalid ORCID iD<span class="sc">:</span> <span class="st">'//orcid.org/0000-0002-9156-5669'</span>.</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>Dzul Manzanilla F, Cruz López C, Morales García <span class="fu">E</span> (<span class="dv">2026</span>). _popmex<span class="sc">:</span> Population</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>Density Mexico_. R package version <span class="dv">0</span>.<span class="fl">1.0</span>, commit</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="dv">5987</span>a7efc6941ba5bf3114f7f55cf3c6326fdd6c, <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>fdzul<span class="sc">/</span>popmex<span class="sc">&gt;</span>.</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="authors-and-contributors">Authors and contributors<a class="anchor" aria-label="anchor" href="#authors-and-contributors"></a>
+</h2>
+<ul>
+<li>Felipe Antonio Dzul Manzanilla <a href="https://orcid.org/0000-0002-2085-9141" class="external-link"><img src="https://img.shields.io/badge/ORCID-0000--0002--2085--9141-A6CE39?logo=orcid&amp;logoColor=white" alt="ORCID"></a> (author, maintainer)</li>
+<li>Cecilia Cruz López <a href="https://orcid.org/0000-0002-9156-5669" class="external-link"><img src="https://img.shields.io/badge/ORCID-0000--0002--9156--5669-A6CE39?logo=orcid&amp;logoColor=white" alt="ORCID"></a> (author)</li>
+<li>Emmanuel Morales García <a href="https://orcid.org/0000-0002-6837-9227" class="external-link"><img src="https://img.shields.io/badge/ORCID-0000--0002--6837--9227-A6CE39?logo=orcid&amp;logoColor=white" alt="ORCID"></a> (author)</li>
+<li>Fabian Correa-Morales <a href="https://orcid.org/0000-0002-6193-1242" class="external-link"><img src="https://img.shields.io/badge/ORCID-0000--0002--6193--1242-A6CE39?logo=orcid&amp;logoColor=white" alt="ORCID"></a> (contributor)</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
+</h2>
+<p>This work was developed at the Instituto Nacional de Salud Pública (INSP), Mexico, in collaboration with the Centro Nacional de Programas Preventivos y Control de Enfermedades (CENAPRECE) of the Secretaría de Salud.</p>
+</div>
+<div class="section level2">
+<h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
+</h2>
+<p>popmex was born from the need to support evidence-based decisions in the Vector-Borne Diseases (VBD) program of CENAPRECE of the Secretaría de Salud of Mexico.</p>
+</div>
+<div class="section level2">
+<h2 id="getting-help">Getting help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
+</h2>
+<ul>
+<li>Bugs and feature requests: open an <a href="https://github.com/fdzul/popmex/issues" class="external-link">issue</a> with a minimal reproducible example (<a href="https://reprex.tidyverse.org" class="external-link">reprex</a>).</li>
+<li>Questions: <a href="mailto:felipe.dzul.m@gmail.com" class="email">felipe.dzul.m@gmail.com</a>
+</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="disclaimer">Disclaimer<a class="anchor" aria-label="anchor" href="#disclaimer"></a>
+</h2>
+<p>The datasets in popmex are derived from public sources and are provided for research and public-health purposes. They are not an official product of the original institutions; please check the original sources for official figures.</p>
 </div>
 <div class="section level2">
 <h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
 </h2>
-<p>This project is licensed under the MIT license - see the file <a href="LICENSE.html">LICENSE.md</a> for more details.</p>
-</div>
-<div class="section level2">
-<h2 id="inspiration">Inspiration<a class="anchor" aria-label="anchor" href="#inspiration"></a>
-</h2>
-<p>The spatial dataset provided by the package were inspired by the need to contribute to decision making in programs of Vector Transmitted Diseases (VTE) and Arthropod Venom Intoxication (IVA) of the CENAPRECE of the Secretary of Health of Mexico</p>
-</div>
-<div class="section level2">
-<h2 id="help">Help.<a class="anchor" aria-label="anchor" href="#help"></a>
-</h2>
-<p>If you find a bug in the code, please submit a minimal reproducible example on <a href="https://github.com/fdzul/popmex/issues" class="external-link">github</a>. For questions and other discussions, do not hesitate to contact me (<a href="mailto:felipe.dzul.m@gmail.com" class="email">felipe.dzul.m@gmail.com</a>)</p>
-<hr>
-<p>Please note that this project is published with a <a href="https://dplyr.tidyverse.org/CODE_OF_CONDUCT" class="external-link">Code of Conduct</a>. By participating in this project you agree to comply with its terms.</p>
+<p>MIT © 2026 Felipe Antonio Dzul Manzanilla. See <a href="LICENSE.html">LICENSE.md</a>.</p>
+<p>Please note that this project is released with a <a href="https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 </div>
-  </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="links">
+  </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/fdzul/popmex/" class="external-link">Browse source code</a></li>
@@ -156,7 +255,6 @@
 </ul>
 </div>
 
-
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
@@ -167,32 +265,37 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Felipe Antonio Dzul Manzanilla <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/https://orcid.org/0000-0002-2085-9141" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
-<li>Cecilia Cruz López <br><small class="roles"> Author </small> <a href="https://orcid.org///orcid.org/0000-0002-9156-5669" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
-<li>Emmanuel Morales García <br><small class="roles"> Author </small> <a href="https://orcid.org/orcid.org/0000-0002-6837-9227" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>
+<a href="https://orcid.org/0000-0002-2085-9141" class="external-link">Felipe Antonio Dzul Manzanilla</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-2085-9141" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Cecilia Cruz López <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-9156-5669" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Emmanuel Morales García <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-6837-9227" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://fdzul.r-universe.dev/popmex" class="external-link"><img src="https://fdzul.r-universe.dev/badges/popmex" alt="R-universe"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://github.com/fdzul/popmex/blob/main/LICENSE.md" class="external-link"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a></li>
+</ul>
+</div>
 
-
-  </div>
+  </aside>
 </div>
 
 
-      <footer><div class="copyright">
-  <p></p>
-<p>Developed by Felipe Antonio Dzul Manzanilla, Cecilia Cruz López, Emmanuel Morales García.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p>Developed by <a href="https://orcid.org/0000-0002-2085-9141" class="external-link">Felipe Antonio Dzul Manzanilla</a>, Cecilia Cruz López, Emmanuel Morales García.</p>
 </div>
 
-<div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+<div class="pkgdown-footer-right">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
-
 
 
 
