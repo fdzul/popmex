@@ -100,11 +100,12 @@ Processing scripts are in
 If you use popmex in a publication, please cite it:
 
 ``` R
-Warning in person1(given = given[[i]], family = family[[i]], middle = middle[[i]], :
-Invalid ORCID iD: '//orcid.org/0000-0002-9156-5669'.
-Dzul Manzanilla F, Cruz López C, Morales García E (2026). _popmex: Population
-Density Mexico_. R package version 0.1.0, commit
-5987a7efc6941ba5bf3114f7f55cf3c6326fdd6c, <https://github.com/fdzul/popmex>.
+Warning in person1(given = given[[i]], family = family[[i]], middle =
+middle[[i]], : Invalid ORCID iD: '//orcid.org/0000-0002-9156-5669'.
+Dzul Manzanilla F, Cruz López C, Morales García E (2026). _popmex:
+Population Density Mexico_. R package version 0.1.0, commit
+5987a7efc6941ba5bf3114f7f55cf3c6326fdd6c,
+<https://github.com/fdzul/popmex>.
 ```
 
 ## Authors and contributors
@@ -112,15 +113,15 @@ Density Mexico_. R package version 0.1.0, commit
 - Felipe Antonio Dzul Manzanilla
   [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--2085--9141-A6CE39?logo=orcid&logoColor=white)](https://orcid.org/0000-0002-2085-9141)
   (author, maintainer)
+- Fabián Correa-Morales
+  [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--6193--1242-A6CE39?logo=orcid&logoColor=white)](https://orcid.org/0000-0002-6193-1242)
+  (author)
 - Cecilia Cruz López
   [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--9156--5669-A6CE39?logo=orcid&logoColor=white)](https://orcid.org/0000-0002-9156-5669)
   (author)
 - Emmanuel Morales García
   [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--6837--9227-A6CE39?logo=orcid&logoColor=white)](https://orcid.org/0000-0002-6837-9227)
   (author)
-- Fabian Correa-Morales
-  [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--6193--1242-A6CE39?logo=orcid&logoColor=white)](https://orcid.org/0000-0002-6193-1242)
-  (contributor)
 
 ## Acknowledgements
 

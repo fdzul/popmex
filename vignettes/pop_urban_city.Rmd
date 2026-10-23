@@ -10,6 +10,8 @@ vignette: >
 ```{r, include = FALSE}
 # The maps need rgeomex (locality boundaries) and several plotting packages.
 # If any of them is missing, the code is shown but not run.
+library(mapview)
+mapviewOptions(basemaps = c("Esri.WorldGrayCanvas","Stadia.AlidadeSmoothDark","OpenStreetMap", "Esri.WorldImagery", "OpenTopoMap"))
 needed <- c("rgeomex", "ggplot2", "cowplot", "ggspatial", "patchwork")
 run <- all(vapply(needed, requireNamespace, logical(1), quietly = TRUE))
 run_interactive <- run && all(vapply(c("mapview", "leafsync"), requireNamespace,
@@ -25,6 +27,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(popmex)
+library(mapview)
 ```
 
 The visualization of the population of an urban city is carried out in two
@@ -61,7 +64,7 @@ pop_map <- function(data, title, location = "bl") {
 }
 
 library(patchwork)
-pop_map(x, "2023") | pop_map(y, "2022")
+pop_map(data = x, title = "2023") | pop_map(data = y, title = "2022")
 ```
 
 ### Interactive map

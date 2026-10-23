@@ -1,0 +1,46 @@
+---
+title: "Extract and Visualize the Population of an State"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Extract and Visualize the Population of an State}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(popmex)
+```
+
+This tutorial demonstrates how to extract population data at the municipality level, using census data from INEGI (2000, 2010, and 2020) as well as population estimates and projections from CONAPO.
+
+
+## INEGI 
+
+
+```{r pop-inegi-2000}
+gtExtras::gt_plt_summary(popmex::pop2000, title = "Total population from the 2000 Census")
+```
+
+```{r pop-inegi-2010}
+gtExtras::gt_plt_summary(popmex::pop2010, title = "Total population from the 2010 Census")
+```
+
+
+```{r pop-inegi-2020}
+gtExtras::gt_plt_summary(popmex::pop2020, title = "Total population from the 2020 Census")
+```
+
+
+## CONAPO
+
+```{r pop-conapo}
+
+```
+
