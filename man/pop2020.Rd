@@ -3,56 +3,55 @@
 \docType{data}
 \name{pop2020}
 \alias{pop2020}
-\title{population by municipality (ITER 2020).}
+\title{Population by municipality of Mexico, ITER 2020}
 \format{
-## `pop2020`
-A data frame with 2469 rows and 44 columns:
+A tibble with 2,469 rows (municipalities) and 44 columns. All
+  population columns are numeric:
 \describe{
-  \item{CVEGEO}{id of the municipality.}
-  \item{pobtot}{population}
-  \item{pobfem}{female population}
-  \item{pobmas}{male population}
-  \item{p_0a2}{population between 0 and 2 years of age}
-  \item{p_0a2_f}{female population between 0 and 2 years of age}
-  \item{p_0a2_m}{male population between 0 and 2 years of age}
-  \item{p_3ymas}{population over 3 years of age}
-  \item{p_3ymas_f}{female population over 3 years of age}
-  \item{p_3ymas_m}{male population over 3 years of age}
-  \item{p_5ymas}{population over 5 years of age}
-  \item{p_5ymas_f}{female population over 5 years of age}
-  \item{p_5ymas_m}{male population over 5 years of age}
-  \item{p_12ymas}{population over 12 years of age}
-  \item{p_12ymas_f}{female population over 12 years of age}
-  \item{p_12ymas_m}{male population over 12 years of age}
-  \item{p_15ymas}{population over 15 years of age}
-  \item{p_15ymas_f}{female population over 15 years of age}
-  \item{p_15ymas_m}{male population over 15 years of age}
-  \item{p_18ymas}{population over 18 years of age}
-  \item{p_18ymas_f}{female population over 18 years of age}
-  \item{p_18ymas_m}{male population over 18 years of age}
-  \item{p_3a5}{population between 3 and 5 years of age}
-  \item{p_3a5_f}{female population between 3 and 5 years of age}
-  \item{p_3a5_m}{male population between 3 and 5 years of age}
-  \item{p_6a11}{population between 6 and 11 years of age}
-  \item{p_6a11_f}{female population between 6 and 11 years of age}
-  \item{p_6a11_m}{male population between 6 and 11 years of age}
-  \item{p_8a14}{population between 8 and 14 years of age}
-  \item{p_8a14_f}{female population between 8 and 14 years of age}
-  \item{p_8a14_m}{male population between 8 and 14 years of age}
-  \item{p_12a14}{population between 12 and 14 years of age}
-  \item{p_12a14_f}{female population between 12 and 14 years of age}
-  \item{p_12a14_m}{male population between 12 and 14 years of age}
-  \item{p_15a17}{population between 15 and 17 years of age}
-  \item{p_15a17_f}{female population between 15 and 17 years of age}
-  \item{p_15a17_m}{male population between 15 and 17 years of age}
-  \item{p_18a24}{population between 18 and 24 years of age}
-  \item{p_18a24_f}{female population between 18 and 24 years of age}
-  \item{p_18a24_m}{male population between 18 and 24 years of age}
-  \item{p_15a49_f}{female population between 15 and 49 years of age}
-  \item{p_60ymas}{population over 60 years of age}
-  \item{p_60ymas_f}{female population over 60 years of age}
-  \item{p_60ymas_m}{male population over 60 years of age}
-  ...
+  \item{CVEGEO}{five-digit municipality code of INEGI (state + municipality).}
+  \item{pobtot}{total population.}
+  \item{pobfem}{female population.}
+  \item{pobmas}{male population.}
+  \item{p_0a2}{population aged 0 to 2 years.}
+  \item{p_0a2_f}{female population aged 0 to 2 years.}
+  \item{p_0a2_m}{male population aged 0 to 2 years.}
+  \item{p_3ymas}{population aged 3 years and over.}
+  \item{p_3ymas_f}{female population aged 3 years and over.}
+  \item{p_3ymas_m}{male population aged 3 years and over.}
+  \item{p_5ymas}{population aged 5 years and over.}
+  \item{p_5ymas_f}{female population aged 5 years and over.}
+  \item{p_5ymas_m}{male population aged 5 years and over.}
+  \item{p_12ymas}{population aged 12 years and over.}
+  \item{p_12ymas_f}{female population aged 12 years and over.}
+  \item{p_12ymas_m}{male population aged 12 years and over.}
+  \item{p_15ymas}{population aged 15 years and over.}
+  \item{p_15ymas_f}{female population aged 15 years and over.}
+  \item{p_15ymas_m}{male population aged 15 years and over.}
+  \item{p_18ymas}{population aged 18 years and over.}
+  \item{p_18ymas_f}{female population aged 18 years and over.}
+  \item{p_18ymas_m}{male population aged 18 years and over.}
+  \item{p_3a5}{population aged 3 to 5 years.}
+  \item{p_3a5_f}{female population aged 3 to 5 years.}
+  \item{p_3a5_m}{male population aged 3 to 5 years.}
+  \item{p_6a11}{population aged 6 to 11 years.}
+  \item{p_6a11_f}{female population aged 6 to 11 years.}
+  \item{p_6a11_m}{male population aged 6 to 11 years.}
+  \item{p_8a14}{population aged 8 to 14 years.}
+  \item{p_8a14_f}{female population aged 8 to 14 years.}
+  \item{p_8a14_m}{male population aged 8 to 14 years.}
+  \item{p_12a14}{population aged 12 to 14 years.}
+  \item{p_12a14_f}{female population aged 12 to 14 years.}
+  \item{p_12a14_m}{male population aged 12 to 14 years.}
+  \item{p_15a17}{population aged 15 to 17 years.}
+  \item{p_15a17_f}{female population aged 15 to 17 years.}
+  \item{p_15a17_m}{male population aged 15 to 17 years.}
+  \item{p_18a24}{population aged 18 to 24 years.}
+  \item{p_18a24_f}{female population aged 18 to 24 years.}
+  \item{p_18a24_m}{male population aged 18 to 24 years.}
+  \item{p_15a49_f}{female population aged 15 to 49 years.}
+  \item{p_60ymas}{population aged 60 years and over.}
+  \item{p_60ymas_f}{female population aged 60 years and over.}
+  \item{p_60ymas_m}{male population aged 60 years and over.}
 }
 }
 \source{
@@ -62,10 +61,9 @@ A data frame with 2469 rows and 44 columns:
 pop2020
 }
 \description{
-a dataset of population by municipality of mexico.
-dataset ...
-}
-\details{
-The population data by total number and sex for each municipality were obtained from the dataset of territorial indicators known as ITER /(Indicadores Territoriales/), which is a database derived from the 2020 Population and Housing Census generated by Instituto Nacional de Estadística y Geografía (INEGI)
+Population of each municipality of Mexico by sex and age group, from the
+territorial indicators (ITER, *Integración Territorial*) of the
+2020 Population and Housing Census of INEGI. Useful as denominators to calculate incidence
+rates.
 }
 \keyword{datasets}

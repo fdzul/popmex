@@ -4,3 +4,7 @@
 ^LICENSE\.md$
 ^data-raw$
 ^\.DS_Store$
+^docs$
+^pkgdown$
+^_pkgdown\.yml$
+^\.github$

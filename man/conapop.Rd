@@ -3,9 +3,36 @@
 \docType{data}
 \name{conapop}
 \alias{conapop}
-\title{Conapo 1990-2040.}
+\title{Population of the municipalities of Mexico, 1990-2040 (CONAPO)}
 \format{
-
+A tibble with 252,450 rows (municipality x sex x year) and 24
+  columns:
+\describe{
+  \item{cvegeo}{five-digit municipality code of INEGI.}
+  \item{nom_ent}{name of the state.}
+  \item{nom_mun}{name of the municipality.}
+  \item{sexo}{sex: `"HOMBRES"` (men) or `"MUJERES"` (women).}
+  \item{ano}{year, 1990 to 2040.}
+  \item{pob_00_04}{population aged 0 to 4 years.}
+  \item{pob_05_09}{population aged 5 to 9 years.}
+  \item{pob_10_14}{population aged 10 to 14 years.}
+  \item{pob_15_19}{population aged 15 to 19 years.}
+  \item{pob_20_24}{population aged 20 to 24 years.}
+  \item{pob_25_29}{population aged 25 to 29 years.}
+  \item{pob_30_34}{population aged 30 to 34 years.}
+  \item{pob_35_39}{population aged 35 to 39 years.}
+  \item{pob_40_44}{population aged 40 to 44 years.}
+  \item{pob_45_49}{population aged 45 to 49 years.}
+  \item{pob_50_54}{population aged 50 to 54 years.}
+  \item{pob_55_59}{population aged 55 to 59 years.}
+  \item{pob_60_64}{population aged 60 to 64 years.}
+  \item{pob_65_69}{population aged 65 to 69 years.}
+  \item{pob_70_74}{population aged 70 to 74 years.}
+  \item{pob_75_79}{population aged 75 to 79 years.}
+  \item{pob_80_84}{population aged 80 to 84 years.}
+  \item{pob_85_mm}{population aged 85 years and over.}
+  \item{pob_total}{total population.}
+}
 }
 \source{
 <https://www.gob.mx/conapo/documentos/reconstruccion-y-proyecciones-de-la-poblacion-de-los-municipios-de-mexico-1990-2040>
@@ -14,10 +41,8 @@
 conapop
 }
 \description{
-Reconstruction and projections of the population of the municipalities of Mexico 1990-2040
-dataset ...
-}
-\details{
-Mid-year population figures are presented for 2,475 municipalities in Mexico, from 1990 to 2020, and population projections from 2021 to 2040.
+Reconstruction (1990-2020) and projections (2021-2040) of the mid-year
+population of the 2,475 municipalities of Mexico by sex and five-year age
+group, published by the National Population Council (CONAPO).
 }
 \keyword{datasets}

@@ -2,25 +2,42 @@
 % Please edit documentation in R/extract_pop.R
 \name{extract_pop}
 \alias{extract_pop}
-\title{extracts the population density at the locality level in hexagons of 400 meters resolution for the years 2023 and 2022}
+\title{Extract the population of a locality in 400 m H3 hexagons}
 \usage{
-extract_pop(year, cve_edo, locality)
+extract_pop(year = 2023, cve_edo, locality)
 }
 \arguments{
-\item{year}{is the year dataset}
+\item{year}{year of the population dataset: 2021, 2022 or 2023.}
 
-\item{cve_edo}{is the id of state.}
+\item{cve_edo}{two-digit state code of INEGI, as text (e.g. `"14"` for
+Jalisco, `"31"` for Yucatán).}
 
-\item{locality}{is the target locality.}
+\item{locality}{name or names of the target localities. The names do not
+need to be exact: the most similar name of the state is used
+(e.g. `"Merida"` finds `"Mérida"`).}
 }
 \value{
-a sf object
+an `sf` object (EPSG:4326) with the hexagons that intersect the
+  localities and their population (`population`).
 }
 \description{
-extracts the population density at the locality level in hexagons of 400 meters resolution for the years 2023 and 2022
+Selects the hexagons of the Kontur/HDX population density dataset
+(`hdx_pop2021`, `hdx_pop2022` or `hdx_pop2023`) that intersect one or
+several urban localities of a state. The locality boundaries come from
+the INEGI 2019 localities of the [rgeomex](https://fdzul.github.io/rgeomex/)
+package.
 }
 \examples{
-popmex::extract_pop(year = 2023, cve_edo = "31", locality = "Merida")
+\donttest{
+if (requireNamespace("rgeomex", quietly = TRUE)) {
+  merida <- extract_pop(year = 2023, cve_edo = "31", locality = "Merida")
+  sum(merida$population)
+}
+}
+}
+\seealso{
+[hdx_pop2023], [hdx_pop2022], [hdx_pop2021],
+  [rgeomex::extract_locality()]
 }
 \author{
 Felipe Antonio Dzul Manzanilla \email{felipe.dzul.m@gmail.com}.

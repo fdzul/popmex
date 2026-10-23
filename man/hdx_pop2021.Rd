@@ -3,27 +3,27 @@
 \docType{data}
 \name{hdx_pop2021}
 \alias{hdx_pop2021}
-\title{Population Density Mexico HDX data 2021}
+\title{Population in 400 m H3 hexagons of Mexico, 2021 (Kontur / HDX)}
 \format{
-## `hdx_pop2021`
-A sf & data frame with 362028 rows and 2 columns:
+An `sf` data frame (EPSG:4326, MULTIPOLYGON geometries) with 362,028 rows:
 \describe{
-  \item{popolation}{Population Density for 400m H3 Hexagons}
-  \item{geom}{geometry}
-  ...
+  \item{population}{estimated number of inhabitants in the hexagon.}
+  \item{geom}{hexagon geometry.}
 }
 }
 \source{
-<https://data.humdata.org/dataset/kontur-population-dataset>
+<https://data.humdata.org/dataset/kontur-population-mexico>
 }
 \usage{
 hdx_pop2021
 }
 \description{
-A subset of data from the HUMANITARIAN DATA EXCHANGE Population Density of Mexico
-dataset ...
+Estimated number of inhabitants in each H3 hexagon of resolution 8
+(about 400 m across) of Mexico, from the Kontur Population dataset
+published in the Humanitarian Data Exchange (HDX). Only hexagons with
+population are included. This edition has no `h3` column.
 }
-\details{
-EPSG 4326...
+\seealso{
+[extract_pop()] to extract the hexagons of a locality.
 }
 \keyword{datasets}

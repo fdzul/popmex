@@ -8,9 +8,18 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+# The maps need rgeomex (locality boundaries) and several plotting packages.
+# If any of them is missing, the code is shown but not run.
+needed <- c("rgeomex", "ggplot2", "cowplot", "ggspatial", "patchwork")
+run <- all(vapply(needed, requireNamespace, logical(1), quietly = TRUE))
+run_interactive <- run && all(vapply(c("mapview", "leafsync"), requireNamespace,
+                                     logical(1), quietly = TRUE))
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = run,
+  fig.width = 7,
+  fig.height = 4
 )
 ```
 
@@ -18,121 +27,88 @@ knitr::opts_chunk$set(
 library(popmex)
 ```
 
-The visualization of the population of an urban city is carried out in two steps, in the first step the population of the urban locality is extracted and in the second step it is visualized.
+The visualization of the population of an urban city is carried out in two
+steps: first the population of the urban locality is extracted with
+`extract_pop()`, and then it is mapped.
 
 ## Population of the metropolitan area of Guadalajara
 
-### Extract the Population
+### Extract the population
 
-```{r}
-x <- popmex::extract_pop(year = 2023,
-                         cve_edo = "14",
-                         locality = c("Guadalajara", "Tlaquepaque", 
-                                      "Zapopan", "Tonalá"))
+```{r guadalajara-extract}
+gdl <- c("Guadalajara", "Tlaquepaque", "Zapopan", "Tonalá")
 
-y <- popmex::extract_pop(year = 2022,
-                         cve_edo = "14",
-                         locality = c("Guadalajara", "Tlaquepaque",
-                                      "Zapopan", "Tonalá"))
+x <- popmex::extract_pop(year = 2023, cve_edo = "14", locality = gdl)
+y <- popmex::extract_pop(year = 2022, cve_edo = "14", locality = gdl)
 
+# total population in each year
+c("2023" = sum(x$population), "2022" = sum(y$population))
 ```
-### Visualization
 
-#### Static map
+### Static map
 
-```{r}
-a <- ggplot2::ggplot() +
-    ggplot2::geom_sf(data = x,
-                     ggplot2::aes(fill = population),
-                     col = "white",
-                     lwd = 0.01) +
-    ggplot2::scale_fill_viridis_c("Population") +
-    cowplot::theme_map() +
-    ggspatial::annotation_scale(style = "ticks")
-b <- ggplot2::ggplot() +
-    ggplot2::geom_sf(data = x,
-                     ggplot2::aes(fill = population),
-                     col = "white",
-                     lwd = 0.01) +
-    ggplot2::scale_fill_viridis_c("Population") +
-    cowplot::theme_map() +
-    ggspatial::annotation_scale(style = "ticks")
+```{r guadalajara-static}
+pop_map <- function(data, title, location = "bl") {
+    ggplot2::ggplot() +
+        ggplot2::geom_sf(data = data,
+                         ggplot2::aes(fill = population),
+                         col = "white",
+                         lwd = 0.01) +
+        ggplot2::scale_fill_viridis_c("Population") +
+        ggplot2::labs(title = title) +
+        cowplot::theme_map() +
+        ggspatial::annotation_scale(style = "ticks", location = location)
+}
+
 library(patchwork)
-a | b
-
+pop_map(x, "2023") | pop_map(y, "2022")
 ```
 
-#### Interactive map
+### Interactive map
 
-```{r}
-a <- mapview::mapview(x,
-                 zcol = "population",
-                 layer.name = "Population 2023")
-b <- mapview::mapview(y,
-                      zcol = "population",
-                      layer.name = "Population 2022")
-
+```{r guadalajara-interactive, eval = run_interactive}
+a <- mapview::mapview(x, zcol = "population", layer.name = "Population 2023")
+b <- mapview::mapview(y, zcol = "population", layer.name = "Population 2022")
 leafsync::sync(a, b)
 ```
-
 
 ## Population of the metropolitan area of Mérida
 
-### Extract the Population
+### Extract the population
 
-```{r}
-x <- popmex::extract_pop(year = 2023,
-                         cve_edo = "31",
-                         locality = c("Merida", "Uman",
-                                      "Kanasin", "Caucel",
-                                      "Cholul"))
+```{r merida-extract}
+mid <- c("Merida", "Uman", "Kanasin", "Caucel", "Cholul")
 
-y <- popmex::extract_pop(year = 2022,
-                         cve_edo = "31",
-                         locality = c("Merida", "Uman",
-                                      "Kanasin", "Caucel",
-                                      "Cholul"))
+x <- popmex::extract_pop(year = 2023, cve_edo = "31", locality = mid)
+y <- popmex::extract_pop(year = 2022, cve_edo = "31", locality = mid)
 
-```
-### Visualization
-
-#### Static map
-
-```{r}
-a <- ggplot2::ggplot() +
-    ggplot2::geom_sf(data = x,
-                     ggplot2::aes(fill = population),
-                     col = "white",
-                     lwd = 0.01) +
-    ggplot2::scale_fill_viridis_c("Population") +
-    cowplot::theme_map() +
-    ggspatial::annotation_scale(style = "ticks", location = "br")
-b <- ggplot2::ggplot() +
-    ggplot2::geom_sf(data = x,
-                     ggplot2::aes(fill = population),
-                     col = "white",
-                     lwd = 0.01) +
-    ggplot2::scale_fill_viridis_c("Population") +
-    cowplot::theme_map() +
-    ggspatial::annotation_scale(style = "ticks", location = "br")
-library(patchwork)
-a | b
-
+c("2023" = sum(x$population), "2022" = sum(y$population))
 ```
 
-#### Interactive map
+### Static map
 
-```{r}
-a <- mapview::mapview(x,
-                 zcol = "population",
-                 layer.name = "Population 2023")
-b <- mapview::mapview(y,
-                      zcol = "population",
-                      layer.name = "Population 2022")
+```{r merida-static}
+pop_map(x, "2023", location = "br") | pop_map(y, "2022", location = "br")
+```
 
+### Interactive map
+
+```{r merida-interactive, eval = run_interactive}
+a <- mapview::mapview(x, zcol = "population", layer.name = "Population 2023")
+b <- mapview::mapview(y, zcol = "population", layer.name = "Population 2022")
 leafsync::sync(a, b)
 ```
 
+## Population by municipality
 
+The census datasets (`pop2000`, `pop2010`, `pop2020`) and the CONAPO
+projections (`conapop`) give the population of each municipality, which is
+the usual denominator of incidence rates.
 
+```{r municipality, eval = TRUE}
+# five most populated municipalities in 2020
+head(pop2020[order(-pop2020$pobtot), c("CVEGEO", "pobtot", "pobfem", "pobmas")], 5)
 
+# CONAPO projection for Mérida (31050) in 2026, both sexes
+sum(conapop$pob_total[conapop$cvegeo == "31050" & conapop$ano == 2026])
+```
