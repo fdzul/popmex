@@ -4,84 +4,238 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+
+```{r pkg-info, include = FALSE}
+# ---- TODO: datos del paquete -------------------------------------------
+pkg_info <- list(
+    # objetivo en una oración: qué hace el paquete y para quién
+    goal = "popmex provides population datasets of Mexico at municipal and hexagon (400 m) resolution, to calculate incidence rates and to map where people live in urban localities.",
+    # tipo: "data" (datos), "functions" (funciones) o "both"
+    type = "data",
+    # estado: experimental, stable o superseded (ver lifecycle.r-lib.org)
+    lifecycle = "experimental"
 )
+
+# Artículos que usan o describen el paquete (deja vacío si no hay).
+# Formato: "Autores (año). Título. *Revista*, volumen(número), páginas. doi"
+articles <- c(
+    # "Dzul-Manzanilla F, et al. (2021). Identifying urban hotspots of dengue, chikungunya, and Zika transmission in Mexico to support risk stratification efforts: a spatial analysis. *The Lancet Planetary Health*, 5(5), e277-e285. https://doi.org/10.1016/S2542-5196(21)00030-9"
+)
+
+# Referencias metodológicas en las que se basan las funciones o los datos.
+references <- c(
+    # "Getis A, Ord JK (1992). The analysis of spatial association by use of distance statistics. *Geographical Analysis*, 24(3), 189-206."
+)
+# -------------------------------------------------------------------------
+
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    fig.path = "man/figures/README-",
+    out.width = "100%"
+)
+
+desc <- read.dcf("DESCRIPTION")
+pkg <- unname(desc[, "Package"])
+gh <- paste0("fdzul/", pkg)
+
+# Tabla de datasets y funciones exportadas a partir de man/*.Rd
+rd_table <- function(kind = c("data", "functions")) {
+    kind <- match.arg(kind)
+    db <- tools::Rd_db(dir = ".")
+    get <- function(rd, tag) {
+        x <- rd[vapply(rd, function(e) identical(attr(e, "Rd_tag"), tag), logical(1))]
+        if (length(x)) trimws(gsub("\\s+", " ", paste(unlist(x[[1]]), collapse = ""))) else NA_character_
+    }
+    info <- do.call(rbind, lapply(db, function(rd) data.frame(
+        name = get(rd, "\\name"),
+        title = get(rd, "\\title"),
+        keyword = paste(vapply(rd[vapply(rd, function(e) identical(attr(e, "Rd_tag"), "\\keyword"), logical(1))],
+                               function(e) paste(unlist(e), collapse = ""), character(1)), collapse = " "),
+        source = get(rd, "\\source"),
+        stringsAsFactors = FALSE)))
+    exports <- sub("^export\\((.*)\\)$", "\\1",
+                   grep("^export\\(", readLines("NAMESPACE"), value = TRUE))
+    is_data <- grepl("datasets", info$keyword)
+    ref <- paste0("https://fdzul.github.io/", pkg, "/reference/", info$name, ".html")
+    if (kind == "data") {
+        x <- info[is_data, ]
+        if (!nrow(x)) return(NULL)
+        src <- ifelse(is.na(x$source), "", sub("^<?(https?://[^ >]+)>?.*$", "[link](\\1)", x$source))
+        data.frame(Dataset = paste0("[`", x$name, "`](", ref[is_data], ")"),
+                   Description = x$title, Source = src)
+    } else {
+        keep <- !is_data & info$name %in% exports & !grepl("internal", info$keyword)
+        x <- info[keep, ]
+        if (!nrow(x)) return(NULL)
+        data.frame(Function = paste0("[`", x$name, "()`](", ref[keep], ")"),
+                   Description = x$title)
+    }
+}
+tab_data <- rd_table("data")
+tab_fun <- rd_table("functions")
 ```
 
-# popmex <img src="man/figures/logo.png" align="right" height="139" alt="" />
+# `r pkg` <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 <!-- badges: start -->
-[![R-universe](https://fdzul.r-universe.dev/badges/popmex)](https://fdzul.r-universe.dev/popmex)
+[![R-universe](https://fdzul.r-universe.dev/badges/`r pkg`)](https://fdzul.r-universe.dev/`r pkg`)
+[![Lifecycle: `r pkg_info$lifecycle`](https://img.shields.io/badge/lifecycle-`r pkg_info$lifecycle`-`r c(experimental = "orange", stable = "brightgreen", superseded = "blue")[[pkg_info$lifecycle]]`.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/`r gh`/blob/main/LICENSE.md)
 <!-- badges: end -->
 
-popmex provides population datasets of Mexico for epidemiological analysis
-and to calculate rates, at municipal and hexagon (400 m) resolution. It is
-part of the [dengueverse](https://fdzul.r-universe.dev).
+## Overview
 
-## Datasets
+`r pkg_info$goal`
 
-**Population in 400 m H3 hexagons** (Kontur, [HDX](https://data.humdata.org/dataset/kontur-population-mexico)):
+Population is the denominator of every rate and the exposure of every
+spatial model. popmex gathers in one place the census population by
+municipality, sex and age group (INEGI 2000, 2010 and 2020), the CONAPO
+reconstructions and projections for 1990-2040, and the population in 400 m
+H3 hexagons (Kontur 2021-2023) to work inside cities.
 
-- `hdx_pop2023`, `hdx_pop2022` and `hdx_pop2021`. Estimated inhabitants per hexagon.
+`r pkg` is part of the [**dengueverse**](https://fdzul.r-universe.dev), a
+family of R packages for the surveillance, spatial analysis and control of
+dengue and other *Aedes*-borne diseases in Mexico.
 
-**Population by municipality**:
+```{r datasets-section, echo = FALSE, results = "asis"}
+if (!is.null(tab_data)) {
+    cat("## Datasets\n\n")
+    print(knitr::kable(tab_data, format = "pipe"))
+    cat("\n\nSee the full description of each dataset with `?dataset_name`.\n\n")
+}
+```
 
-- `pop2020`, `pop2010` and `pop2000`. Census population by sex and age group from the
-  territorial indicators (ITER) of the Population and Housing Censuses of
-  [INEGI](https://www.inegi.org.mx/app/scitel/Default?ev=9).
-- `conapop`. Reconstruction (1990-2020) and projections (2021-2040) of the population
-  of the 2,475 municipalities by sex and age group, from
-  [CONAPO](https://www.gob.mx/conapo/documentos/reconstruccion-y-proyecciones-de-la-poblacion-de-los-municipios-de-mexico-1990-2040).
+```{r functions-section, echo = FALSE, results = "asis"}
+if (!is.null(tab_fun)) {
+    cat("## Main functions\n\n")
+    print(knitr::kable(tab_fun, format = "pipe"))
+    cat("\n")
+}
+```
 
 ## Installation
 
-``` r
-install.packages("popmex",
+Install the released version from the
+[dengueverse R-universe](https://fdzul.r-universe.dev):
+
+```r
+install.packages("`r pkg`",
                  repos = c("https://fdzul.r-universe.dev",
                            "https://cloud.r-project.org"))
 ```
 
+Or the development version from [GitHub](https://github.com/`r gh`):
+
+```r
+# install.packages("pak")
+pak::pak("`r gh`")
+```
+
 ## Example
 
-``` r
+```{r example, eval = FALSE}
 library(popmex)
 
-# hexagons of the metropolitan area of Mérida, 2023
+# population in 400 m hexagons of the metropolitan area of Mérida, 2023
 merida <- extract_pop(year = 2023, cve_edo = "31",
                       locality = c("Merida", "Uman", "Kanasin"))
 sum(merida$population)
 
-# population of each municipality in 2020, to use as denominator
+# census population of each municipality in 2020 (denominator of rates)
 head(pop2020[, c("CVEGEO", "pobtot", "pobfem", "pobmas")])
 ```
 
-## Credits
+Longer examples are in the
+[articles](https://fdzul.github.io/`r pkg`/articles/) of the website.
 
-The hexagon datasets come from the Kontur Population dataset published in the
-Humanitarian Data Exchange ([HDX](https://data.humdata.org)). The municipal
-datasets come from INEGI and CONAPO.
+## Data sources
 
+- **Kontur Population** (`hdx_pop2021`, `hdx_pop2022`, `hdx_pop2023`),
+  published in the [Humanitarian Data Exchange](https://data.humdata.org/dataset/kontur-population-mexico).
+  License: CC BY 4.0.
+- **ITER, Censos de Población y Vivienda 2000, 2010 y 2020**
+  (`pop2000`, `pop2010`, `pop2020`), [INEGI](https://www.inegi.org.mx/app/scitel/Default?ev=9).
+  Population columns converted to numeric; totals checked against INEGI.
+- **Reconstrucción y proyecciones de la población de los municipios de
+  México 1990-2040** (`conapop`), [CONAPO](https://www.gob.mx/conapo/documentos/reconstruccion-y-proyecciones-de-la-poblacion-de-los-municipios-de-mexico-1990-2040).
+
+Processing scripts are in [`data-raw/`](https://github.com/`r gh`/tree/main/data-raw).
+
+## How to cite
+
+If you use `r pkg` in a publication, please cite it:
+
+```{r citation, echo = FALSE, comment = ""}
+if (requireNamespace(pkg, quietly = TRUE)) {
+    print(citation(pkg), style = "text")
+} else {
+    cat("citation(\"", pkg, "\")\n", sep = "")
+}
+```
+
+```{r articles-section, echo = FALSE, results = "asis"}
+if (length(articles)) {
+    cat("## Publications using ", pkg, "\n\n", sep = "")
+    cat(paste0("- ", articles), sep = "\n")
+    cat("\n")
+}
+```
+
+```{r references-section, echo = FALSE, results = "asis"}
+if (length(references)) {
+    cat("## References\n\n")
+    cat(paste0("- ", references), sep = "\n")
+    cat("\n")
+}
+```
+
+## Authors and contributors
+
+```{r authors, echo = FALSE, results = "asis"}
+roles <- c(aut = "author", cre = "maintainer", ctb = "contributor",
+           dtc = "data contributor", fnd = "funder")
+people <- eval(parse(text = desc[, "Authors@R"]))
+for (p in people) {
+    orcid <- p$comment[["ORCID"]]
+    cat("- ", paste(p$given, p$family),
+        if (!is.null(orcid)) paste0(" [![ORCID](https://img.shields.io/badge/ORCID-", gsub("-", "--", orcid),
+                                    "-A6CE39?logo=orcid&logoColor=white)](https://orcid.org/", orcid, ")"),
+        " (", paste(roles[p$role], collapse = ", "), ")\n", sep = "")
+}
+```
+
+## Acknowledgements
+
+This work was developed at the Instituto Nacional de Salud Pública (INSP),
+Mexico, in collaboration with the Centro Nacional de Programas Preventivos y
+Control de Enfermedades (CENAPRECE) of the Secretaría de Salud.
+
+## Motivation
+
+`r pkg` was born from the need to support evidence-based decisions in the
+Vector-Borne Diseases (VBD) program of CENAPRECE of the Secretaría de Salud
+of Mexico.
+
+## Getting help
+
+- Bugs and feature requests: open an
+  [issue](https://github.com/`r gh`/issues) with a minimal reproducible
+  example ([reprex](https://reprex.tidyverse.org)).
+- Questions: felipe.dzul.m@gmail.com
+
+## Disclaimer
+
+The datasets in `r pkg` are derived from public sources and are provided
+for research and public-health purposes. They are not an official product
+of the original institutions; please check the original sources for
+official figures.
 
 ## License
 
-This project is licensed under the MIT license - see the file [LICENSE.md](LICENSE.md) for more details.
+MIT © `r format(Sys.Date(), "%Y")` Felipe Antonio Dzul Manzanilla. See
+[LICENSE.md](LICENSE.md).
 
-## Inspiration
-
-The spatial dataset provided by the package were inspired by the need to contribute to decision making in programs
-of Vector Transmitted Diseases (VTE) and Arthropod Venom Intoxication (IVA) of the CENAPRECE of the Secretary of Health of Mexico
-
-
-
-## Help.
-
-If you find a bug in the code, please submit a minimal reproducible example on [github](https://github.com/fdzul/popmex/issues). For questions and other discussions, do not hesitate to contact me (felipe.dzul.m@gmail.com)
-
------
-Please note that this project is published with a [Code of
-Conduct](https://dplyr.tidyverse.org/CODE_OF_CONDUCT). By participating in this project you agree to comply with its terms.
+Please note that this project is released with a
+[Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
+By participating in this project you agree to abide by its terms.

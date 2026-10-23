@@ -1,0 +1,40 @@
+# PLANTILLA DENGUEVERSE · _pkgdown.yml
+# Sitio web del paquete con el mismo aspecto en todo el dengueverse.
+# Ajusta solo "reference" (grupos de funciones/datasets) y, si quieres, "articles".
+
+url: https://fdzul.github.io/popmex/   # TODO: cambia PAQUETE
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+  bslib:
+    primary: "#1B6E7C"
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, news]
+    right: [search, dengueverse, github]
+  components:
+    dengueverse:
+      text: dengueverse
+      href: https://fdzul.r-universe.dev
+
+home:
+  sidebar:
+    structure: [links, license, citation, authors, dev]
+
+authors:
+  Felipe Antonio Dzul Manzanilla:
+    href: https://orcid.org/0000-0002-2085-9141
+
+reference:
+  # TODO: agrupa según el paquete. Ejemplos:
+  - title: Datasets
+    desc: Data included in the package.
+    contents:
+      - has_keyword("datasets")
+  - title: Main functions
+    desc: Functions to reach the goal of the package.
+    contents:
+      - -has_keyword("datasets")
+      - -has_keyword("internal")

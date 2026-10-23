@@ -6,32 +6,52 @@
 <!-- badges: start -->
 
 [![R-universe](https://fdzul.r-universe.dev/badges/popmex)](https://fdzul.r-universe.dev/popmex)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![License:
+MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/fdzul/popmex/blob/main/LICENSE.md)
 <!-- badges: end -->
 
-popmex provides population datasets of Mexico for epidemiological
-analysis and to calculate rates, at municipal and hexagon (400 m)
-resolution. It is part of the
-[dengueverse](https://fdzul.r-universe.dev).
+## Overview
+
+popmex provides population datasets of Mexico at municipal and hexagon
+(400 m) resolution, to calculate incidence rates and to map where people
+live in urban localities.
+
+Population is the denominator of every rate and the exposure of every
+spatial model. popmex gathers in one place the census population by
+municipality, sex and age group (INEGI 2000, 2010 and 2020), the CONAPO
+reconstructions and projections for 1990-2040, and the population in 400
+m H3 hexagons (Kontur 2021-2023) to work inside cities.
+
+popmex is part of the [**dengueverse**](https://fdzul.r-universe.dev), a
+family of R packages for the surveillance, spatial analysis and control
+of dengue and other *Aedes*-borne diseases in Mexico.
 
 ## Datasets
 
-**Population in 400 m H3 hexagons** (Kontur,
-[HDX](https://data.humdata.org/dataset/kontur-population-mexico)):
+| Dataset                                                                    | Description                                                    | Source                                                                                                                           |
+|:---------------------------------------------------------------------------|:---------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------|
+| [`conapop`](https://fdzul.github.io/popmex/reference/conapop.html)         | Population of the municipalities of Mexico, 1990-2040 (CONAPO) | [link](https://www.gob.mx/conapo/documentos/reconstruccion-y-proyecciones-de-la-poblacion-de-los-municipios-de-mexico-1990-2040) |
+| [`hdx_pop2021`](https://fdzul.github.io/popmex/reference/hdx_pop2021.html) | Population in 400 m H3 hexagons of Mexico, 2021 (Kontur / HDX) | [link](https://data.humdata.org/dataset/kontur-population-mexico)                                                                |
+| [`hdx_pop2022`](https://fdzul.github.io/popmex/reference/hdx_pop2022.html) | Population in 400 m H3 hexagons of Mexico, 2022 (Kontur / HDX) | [link](https://data.humdata.org/dataset/kontur-population-mexico)                                                                |
+| [`hdx_pop2023`](https://fdzul.github.io/popmex/reference/hdx_pop2023.html) | Population in 400 m H3 hexagons of Mexico, 2023 (Kontur / HDX) | [link](https://data.humdata.org/dataset/kontur-population-mexico)                                                                |
+| [`pop2000`](https://fdzul.github.io/popmex/reference/pop2000.html)         | Population by municipality of Mexico, ITER 2000                | [link](https://www.inegi.org.mx/app/scitel/Default?ev=9)                                                                         |
+| [`pop2010`](https://fdzul.github.io/popmex/reference/pop2010.html)         | Population by municipality of Mexico, ITER 2010                | [link](https://www.inegi.org.mx/app/scitel/Default?ev=9)                                                                         |
+| [`pop2020`](https://fdzul.github.io/popmex/reference/pop2020.html)         | Population by municipality of Mexico, ITER 2020                | [link](https://www.inegi.org.mx/app/scitel/Default?ev=9)                                                                         |
 
-- `hdx_pop2023`, `hdx_pop2022` and `hdx_pop2021`. Estimated inhabitants
-  per hexagon.
+See the full description of each dataset with `?dataset_name`.
 
-**Population by municipality**:
+## Main functions
 
-- `pop2020`, `pop2010` and `pop2000`. Census population by sex and age
-  group from the territorial indicators (ITER) of the Population and
-  Housing Censuses of
-  [INEGI](https://www.inegi.org.mx/app/scitel/Default?ev=9).
-- `conapop`. Reconstruction (1990-2020) and projections (2021-2040) of
-  the population of the 2,475 municipalities by sex and age group, from
-  [CONAPO](https://www.gob.mx/conapo/documentos/reconstruccion-y-proyecciones-de-la-poblacion-de-los-municipios-de-mexico-1990-2040).
+| Function                                                                     | Description                                               |
+|:-----------------------------------------------------------------------------|:----------------------------------------------------------|
+| [`extract_pop()`](https://fdzul.github.io/popmex/reference/extract_pop.html) | Extract the population of a locality in 400 m H3 hexagons |
 
 ## Installation
+
+Install the released version from the [dengueverse
+R-universe](https://fdzul.r-universe.dev):
 
 ``` r
 install.packages("popmex",
@@ -39,47 +59,102 @@ install.packages("popmex",
                            "https://cloud.r-project.org"))
 ```
 
+Or the development version from
+[GitHub](https://github.com/fdzul/popmex):
+
+``` r
+# install.packages("pak")
+pak::pak("fdzul/popmex")
+```
+
 ## Example
 
 ``` r
 library(popmex)
 
-# hexagons of the metropolitan area of Mérida, 2023
+# population in 400 m hexagons of the metropolitan area of Mérida, 2023
 merida <- extract_pop(year = 2023, cve_edo = "31",
                       locality = c("Merida", "Uman", "Kanasin"))
 sum(merida$population)
 
-# population of each municipality in 2020, to use as denominator
+# census population of each municipality in 2020 (denominator of rates)
 head(pop2020[, c("CVEGEO", "pobtot", "pobfem", "pobmas")])
 ```
 
-## Credits
+Longer examples are in the
+[articles](https://fdzul.github.io/popmex/articles/) of the website.
 
-The hexagon datasets come from the Kontur Population dataset published
-in the Humanitarian Data Exchange ([HDX](https://data.humdata.org)). The
-municipal datasets come from INEGI and CONAPO.
+## Data sources
+
+- **Kontur Population** (`hdx_pop2021`, `hdx_pop2022`, `hdx_pop2023`),
+  published in the [Humanitarian Data
+  Exchange](https://data.humdata.org/dataset/kontur-population-mexico).
+  License: CC BY 4.0.
+- **ITER, Censos de Población y Vivienda 2000, 2010 y 2020** (`pop2000`,
+  `pop2010`, `pop2020`),
+  [INEGI](https://www.inegi.org.mx/app/scitel/Default?ev=9). Population
+  columns converted to numeric; totals checked against INEGI.
+- **Reconstrucción y proyecciones de la población de los municipios de
+  México 1990-2040** (`conapop`),
+  [CONAPO](https://www.gob.mx/conapo/documentos/reconstruccion-y-proyecciones-de-la-poblacion-de-los-municipios-de-mexico-1990-2040).
+
+Processing scripts are in
+[`data-raw/`](https://github.com/fdzul/popmex/tree/main/data-raw).
+
+## How to cite
+
+If you use popmex in a publication, please cite it:
+
+    Dzul Manzanilla F, Cruz López C, Morales García E (2026). _popmex:
+    Population Datasets of Mexico at Municipal and Hexagon Resolution_. R
+    package version 0.2.0, <https://fdzul.r-universe.dev/popmex>.
+
+## Authors and contributors
+
+- Felipe Antonio Dzul Manzanilla
+  [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--2085--9141-A6CE39?logo=orcid&logoColor=white)](https://orcid.org/0000-0002-2085-9141)
+  (author, maintainer)
+- Cecilia Cruz López
+  [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--9156--5669-A6CE39?logo=orcid&logoColor=white)](https://orcid.org/0000-0002-9156-5669)
+  (author)
+- Emmanuel Morales García
+  [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--6837--9227-A6CE39?logo=orcid&logoColor=white)](https://orcid.org/0000-0002-6837-9227)
+  (author)
+- Fabian Correa-Morales
+  [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--6193--1242-A6CE39?logo=orcid&logoColor=white)](https://orcid.org/0000-0002-6193-1242)
+  (contributor)
+
+## Acknowledgements
+
+This work was developed at the Instituto Nacional de Salud Pública
+(INSP), Mexico, in collaboration with the Centro Nacional de Programas
+Preventivos y Control de Enfermedades (CENAPRECE) of the Secretaría de
+Salud.
+
+## Motivation
+
+popmex was born from the need to support evidence-based decisions in the
+Vector-Borne Diseases (VBD) program of CENAPRECE of the Secretaría de
+Salud of Mexico.
+
+## Getting help
+
+- Bugs and feature requests: open an
+  [issue](https://github.com/fdzul/popmex/issues) with a minimal
+  reproducible example ([reprex](https://reprex.tidyverse.org)).
+- Questions: <felipe.dzul.m@gmail.com>
+
+## Disclaimer
+
+The datasets in popmex are derived from public sources and are provided
+for research and public-health purposes. They are not an official
+product of the original institutions; please check the original sources
+for official figures.
 
 ## License
 
-This project is licensed under the MIT license - see the file
-[LICENSE.md](LICENSE.md) for more details.
+MIT © 2026 Felipe Antonio Dzul Manzanilla. See [LICENSE.md](LICENSE.md).
 
-## Inspiration
-
-The spatial dataset provided by the package were inspired by the need to
-contribute to decision making in programs of Vector Transmitted Diseases
-(VTE) and Arthropod Venom Intoxication (IVA) of the CENAPRECE of the
-Secretary of Health of Mexico
-
-## Help.
-
-If you find a bug in the code, please submit a minimal reproducible
-example on [github](https://github.com/fdzul/popmex/issues). For
-questions and other discussions, do not hesitate to contact me
-(<felipe.dzul.m@gmail.com>)
-
-------------------------------------------------------------------------
-
-Please note that this project is published with a [Code of
-Conduct](https://dplyr.tidyverse.org/CODE_OF_CONDUCT). By participating
-in this project you agree to comply with its terms.
+Please note that this project is released with a [Contributor Code of
+Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
+By participating in this project you agree to abide by its terms.
