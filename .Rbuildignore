@@ -8,3 +8,5 @@
 ^pkgdown$
 ^_pkgdown\.yml$
 ^\.github$
+^build_readme\.R$
+^README\.es\.md$

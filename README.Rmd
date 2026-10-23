@@ -1,80 +1,108 @@
 ---
 output: github_document
+params:
+  lang: en
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
+```{r setup, include = FALSE}
+lang <- params$lang
+tr <- function(en, es) if (identical(lang, "es")) es else en
 
-```{r pkg-info, include = FALSE}
-# ---- TODO: datos del paquete -------------------------------------------
+# ---- datos del paquete ---------------------------------------------------
 pkg_info <- list(
-    # objetivo en una oración: qué hace el paquete y para quién
-    goal = "popmex provides population datasets of Mexico at municipal and hexagon (400 m) resolution, to calculate incidence rates and to map where people live in urban localities.",
-    # tipo: "data" (datos), "functions" (funciones) o "both"
-    type = "data",
-    # estado: experimental, stable o superseded (ver lifecycle.r-lib.org)
-    lifecycle = "experimental"
+    lifecycle = "experimental",
+
+    goal = tr("popmex provides population datasets of Mexico at municipal and hexagon (400 m) resolution, to calculate incidence rates and to map where people live in urban localities.",
+              "popmex ofrece bases de datos de población de México a nivel municipal y en hexágonos de 400 m, para calcular tasas de incidencia y mapear dónde vive la población en las localidades urbanas."),
+
+    overview = tr("Population is the denominator of every rate and the exposure of every spatial model. popmex gathers in one place the census population by municipality, sex and age group (INEGI 2000, 2010 and 2020), the CONAPO reconstructions and projections for 1990-2040, and the population in 400 m H3 hexagons (Kontur 2021-2023) to work inside cities.",
+                  "La población es el denominador de toda tasa y la exposición de todo modelo espacial. popmex reúne en un solo lugar la población censal por municipio, sexo y grupo de edad (INEGI 2000, 2010 y 2020), las reconstrucciones y proyecciones de CONAPO 1990-2040 y la población en hexágonos H3 de 400 m (Kontur 2021-2023) para trabajar al interior de las ciudades."),
+
+    example = paste(
+        "library(popmex)",
+        "",
+        tr("# population in 400 m hexagons of the metropolitan area of Mérida, 2023",
+           "# población en hexágonos de 400 m de la zona metropolitana de Mérida, 2023"),
+        "merida <- extract_pop(year = 2023, cve_edo = \"31\",",
+        "                      locality = c(\"Merida\", \"Uman\", \"Kanasin\"))",
+        "sum(merida$population)",
+        "",
+        tr("# census population of each municipality in 2020 (denominator of rates)",
+           "# población censal de cada municipio en 2020 (denominador de tasas)"),
+        "head(pop2020[, c(\"CVEGEO\", \"pobtot\", \"pobfem\", \"pobmas\")])",
+        sep = "\n"),
+
+    sources = c(
+        tr("**Kontur Population** (`hdx_pop2021`, `hdx_pop2022`, `hdx_pop2023`), published in the [Humanitarian Data Exchange](https://data.humdata.org/dataset/kontur-population-mexico). License: CC BY 4.0.",
+           "**Kontur Population** (`hdx_pop2021`, `hdx_pop2022`, `hdx_pop2023`), publicada en el [Humanitarian Data Exchange](https://data.humdata.org/dataset/kontur-population-mexico). Licencia: CC BY 4.0."),
+        tr("**ITER, Censos de Población y Vivienda 2000, 2010 y 2020** (`pop2000`, `pop2010`, `pop2020`), [INEGI](https://www.inegi.org.mx/app/scitel/Default?ev=9). Population columns converted to numeric; totals checked against INEGI.",
+           "**ITER, Censos de Población y Vivienda 2000, 2010 y 2020** (`pop2000`, `pop2010`, `pop2020`), [INEGI](https://www.inegi.org.mx/app/scitel/Default?ev=9). Columnas de población convertidas a numéricas; totales verificados contra INEGI."),
+        tr("**Reconstrucción y proyecciones de la población de los municipios de México 1990-2040** (`conapop`), [CONAPO](https://www.gob.mx/conapo/documentos/reconstruccion-y-proyecciones-de-la-poblacion-de-los-municipios-de-mexico-1990-2040).",
+           "**Reconstrucción y proyecciones de la población de los municipios de México 1990-2040** (`conapop`), [CONAPO](https://www.gob.mx/conapo/documentos/reconstruccion-y-proyecciones-de-la-poblacion-de-los-municipios-de-mexico-1990-2040).")
+    ),
+
+    motivation = tr("PAQUETE was born from the need to support evidence-based decisions in the Vector-Borne Diseases (VBD) program of CENAPRECE of the Secretaría de Salud of Mexico.",
+                    "PAQUETE nace de la necesidad de apoyar la toma de decisiones basada en evidencia en el programa de Enfermedades Transmitidas por Vector (ETV) del CENAPRECE de la Secretaría de Salud de México."),
+
+    disclaimer = TRUE
 )
 
-# Artículos que usan o describen el paquete (deja vacío si no hay).
-# Formato: "Autores (año). Título. *Revista*, volumen(número), páginas. doi"
-articles <- c(
-    # "Dzul-Manzanilla F, et al. (2021). Identifying urban hotspots of dengue, chikungunya, and Zika transmission in Mexico to support risk stratification efforts: a spatial analysis. *The Lancet Planetary Health*, 5(5), e277-e285. https://doi.org/10.1016/S2542-5196(21)00030-9"
-)
-
-# Referencias metodológicas en las que se basan las funciones o los datos.
-references <- c(
-    # "Getis A, Ord JK (1992). The analysis of spatial association by use of distance statistics. *Geographical Analysis*, 24(3), 189-206."
-)
+articles <- c()
+references <- c()
 # -------------------------------------------------------------------------
 
-knitr::opts_chunk$set(
-    collapse = TRUE,
-    comment = "#>",
-    fig.path = "man/figures/README-",
-    out.width = "100%"
-)
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>",
+                      fig.path = "man/figures/README-", out.width = "100%")
 
 desc <- read.dcf("DESCRIPTION")
 pkg <- unname(desc[, "Package"])
 gh <- paste0("fdzul/", pkg)
+site <- paste0("https://fdzul.github.io/", pkg)
+pkg_info <- lapply(pkg_info, function(x) if (is.character(x)) gsub("PAQUETE", pkg, x) else x)
 
-# Tabla de datasets y funciones exportadas a partir de man/*.Rd
+# Tablas de datasets y funciones exportadas a partir de man/*.Rd
 rd_table <- function(kind = c("data", "functions")) {
     kind <- match.arg(kind)
     db <- tools::Rd_db(dir = ".")
+    tagged <- function(rd, tag) rd[vapply(rd, function(e) identical(attr(e, "Rd_tag"), tag), logical(1))]
     get <- function(rd, tag) {
-        x <- rd[vapply(rd, function(e) identical(attr(e, "Rd_tag"), tag), logical(1))]
+        x <- tagged(rd, tag)
         if (length(x)) trimws(gsub("\\s+", " ", paste(unlist(x[[1]]), collapse = ""))) else NA_character_
     }
     info <- do.call(rbind, lapply(db, function(rd) data.frame(
         name = get(rd, "\\name"),
         title = get(rd, "\\title"),
-        keyword = paste(vapply(rd[vapply(rd, function(e) identical(attr(e, "Rd_tag"), "\\keyword"), logical(1))],
-                               function(e) paste(unlist(e), collapse = ""), character(1)), collapse = " "),
+        keyword = paste(vapply(tagged(rd, "\\keyword"), function(e) paste(unlist(e), collapse = ""),
+                               character(1)), collapse = " "),
         source = get(rd, "\\source"),
         stringsAsFactors = FALSE)))
-    exports <- sub("^export\\((.*)\\)$", "\\1",
-                   grep("^export\\(", readLines("NAMESPACE"), value = TRUE))
+    exports <- sub("^export\\((.*)\\)$", "\\1", grep("^export\\(", readLines("NAMESPACE"), value = TRUE))
+    exports <- gsub('"', "", exports)
     is_data <- grepl("datasets", info$keyword)
-    ref <- paste0("https://fdzul.github.io/", pkg, "/reference/", info$name, ".html")
+    ref <- paste0(site, "/reference/", info$name, ".html")
     if (kind == "data") {
         x <- info[is_data, ]
         if (!nrow(x)) return(NULL)
         src <- ifelse(is.na(x$source), "", sub("^<?(https?://[^ >]+)>?.*$", "[link](\\1)", x$source))
-        data.frame(Dataset = paste0("[`", x$name, "`](", ref[is_data], ")"),
-                   Description = x$title, Source = src)
+        out <- data.frame(paste0("[`", x$name, "`](", ref[is_data], ")"), x$title, src)
+        names(out) <- c(tr("Dataset", "Base de datos"), tr("Description", "Descripción"), tr("Source", "Fuente"))
     } else {
         keep <- !is_data & info$name %in% exports & !grepl("internal", info$keyword)
         x <- info[keep, ]
         if (!nrow(x)) return(NULL)
-        data.frame(Function = paste0("[`", x$name, "()`](", ref[keep], ")"),
-                   Description = x$title)
+        out <- data.frame(paste0("[`", x$name, "()`](", ref[keep], ")"), x$title)
+        names(out) <- c(tr("Function", "Función"), tr("Description", "Descripción"))
     }
+    out
 }
 tab_data <- rd_table("data")
 tab_fun <- rd_table("functions")
 ```
+
+<!-- `r tr("README.md is generated from README.Rmd. Please edit that file", "README.es.md se genera desde README.Rmd. Edita ese archivo")` -->
+
+`r tr("**English** · [Español](README.es.md)", "[English](README.md) · **Español**")`
 
 # `r pkg` <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
@@ -84,40 +112,34 @@ tab_fun <- rd_table("functions")
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/`r gh`/blob/main/LICENSE.md)
 <!-- badges: end -->
 
-## Overview
+## `r tr("Overview", "Descripción general")`
 
 `r pkg_info$goal`
 
-Population is the denominator of every rate and the exposure of every
-spatial model. popmex gathers in one place the census population by
-municipality, sex and age group (INEGI 2000, 2010 and 2020), the CONAPO
-reconstructions and projections for 1990-2040, and the population in 400 m
-H3 hexagons (Kontur 2021-2023) to work inside cities.
+`r pkg_info$overview`
 
-`r pkg` is part of the [**dengueverse**](https://fdzul.r-universe.dev), a
-family of R packages for the surveillance, spatial analysis and control of
-dengue and other *Aedes*-borne diseases in Mexico.
+`r tr(paste0(pkg, " is part of the [**dengueverse**](https://fdzul.r-universe.dev), a family of R packages for the surveillance, spatial analysis and control of dengue and other *Aedes*-borne diseases in Mexico."), paste0(pkg, " forma parte del [**dengueverse**](https://fdzul.r-universe.dev), una familia de paquetes de R para la vigilancia, el análisis espacial y el control del dengue y otras enfermedades transmitidas por *Aedes* en México."))`
 
 ```{r datasets-section, echo = FALSE, results = "asis"}
 if (!is.null(tab_data)) {
-    cat("## Datasets\n\n")
+    cat("##", tr("Datasets", "Bases de datos"), "\n\n")
     print(knitr::kable(tab_data, format = "pipe"))
-    cat("\n\nSee the full description of each dataset with `?dataset_name`.\n\n")
+    cat("\n\n", tr("See the full description of each dataset with `?name`.",
+                   "Consulta la descripción completa de cada base con `?nombre`."), "\n\n", sep = "")
 }
 ```
 
 ```{r functions-section, echo = FALSE, results = "asis"}
 if (!is.null(tab_fun)) {
-    cat("## Main functions\n\n")
+    cat("##", tr("Main functions", "Funciones principales"), "\n\n")
     print(knitr::kable(tab_fun, format = "pipe"))
     cat("\n")
 }
 ```
 
-## Installation
+## `r tr("Installation", "Instalación")`
 
-Install the released version from the
-[dengueverse R-universe](https://fdzul.r-universe.dev):
+`r tr("Install the released version from the [dengueverse R-universe](https://fdzul.r-universe.dev):", "Instala la versión publicada desde el [R-universe del dengueverse](https://fdzul.r-universe.dev):")`
 
 ```r
 install.packages("`r pkg`",
@@ -125,46 +147,36 @@ install.packages("`r pkg`",
                            "https://cloud.r-project.org"))
 ```
 
-Or the development version from [GitHub](https://github.com/`r gh`):
+`r tr(paste0("Or the development version from [GitHub](https://github.com/", gh, "):"), paste0("O la versión en desarrollo desde [GitHub](https://github.com/", gh, "):"))`
 
 ```r
 # install.packages("pak")
 pak::pak("`r gh`")
 ```
 
-## Example
+## `r tr("Example", "Ejemplo")`
 
-```{r example, eval = FALSE}
-library(popmex)
-
-# population in 400 m hexagons of the metropolitan area of Mérida, 2023
-merida <- extract_pop(year = 2023, cve_edo = "31",
-                      locality = c("Merida", "Uman", "Kanasin"))
-sum(merida$population)
-
-# census population of each municipality in 2020 (denominator of rates)
-head(pop2020[, c("CVEGEO", "pobtot", "pobfem", "pobmas")])
+```{r example-code, echo = FALSE, results = "asis"}
+cat("```r\n", pkg_info$example, "\n```\n", sep = "")
 ```
 
-Longer examples are in the
-[articles](https://fdzul.github.io/`r pkg`/articles/) of the website.
+`r tr(paste0("Longer examples are in the [articles](", site, "/articles/) of the website."), paste0("Hay ejemplos más completos en los [artículos](", site, "/articles/) del sitio web."))`
 
-## Data sources
+```{r sources-section, echo = FALSE, results = "asis"}
+if (length(pkg_info$sources)) {
+    cat("##", tr("Data sources", "Fuentes de datos"), "\n\n")
+    cat(paste0("- ", pkg_info$sources), sep = "\n")
+    if (dir.exists("data-raw")) {
+        cat("\n", tr("Processing scripts are in ", "Los scripts de procesamiento están en "),
+            "[`data-raw/`](https://github.com/", gh, "/tree/main/data-raw).\n", sep = "")
+    }
+    cat("\n")
+}
+```
 
-- **Kontur Population** (`hdx_pop2021`, `hdx_pop2022`, `hdx_pop2023`),
-  published in the [Humanitarian Data Exchange](https://data.humdata.org/dataset/kontur-population-mexico).
-  License: CC BY 4.0.
-- **ITER, Censos de Población y Vivienda 2000, 2010 y 2020**
-  (`pop2000`, `pop2010`, `pop2020`), [INEGI](https://www.inegi.org.mx/app/scitel/Default?ev=9).
-  Population columns converted to numeric; totals checked against INEGI.
-- **Reconstrucción y proyecciones de la población de los municipios de
-  México 1990-2040** (`conapop`), [CONAPO](https://www.gob.mx/conapo/documentos/reconstruccion-y-proyecciones-de-la-poblacion-de-los-municipios-de-mexico-1990-2040).
+## `r tr("How to cite", "Cómo citar")`
 
-Processing scripts are in [`data-raw/`](https://github.com/`r gh`/tree/main/data-raw).
-
-## How to cite
-
-If you use `r pkg` in a publication, please cite it:
+`r tr(paste0("If you use ", pkg, " in a publication, please cite it:"), paste0("Si usas ", pkg, " en una publicación, por favor cítalo:"))`
 
 ```{r citation, echo = FALSE, comment = ""}
 if (requireNamespace(pkg, quietly = TRUE)) {
@@ -176,7 +188,7 @@ if (requireNamespace(pkg, quietly = TRUE)) {
 
 ```{r articles-section, echo = FALSE, results = "asis"}
 if (length(articles)) {
-    cat("## Publications using ", pkg, "\n\n", sep = "")
+    cat("##", tr(paste("Publications using", pkg), paste("Publicaciones que usan", pkg)), "\n\n")
     cat(paste0("- ", articles), sep = "\n")
     cat("\n")
 }
@@ -184,17 +196,20 @@ if (length(articles)) {
 
 ```{r references-section, echo = FALSE, results = "asis"}
 if (length(references)) {
-    cat("## References\n\n")
+    cat("##", tr("References", "Referencias"), "\n\n")
     cat(paste0("- ", references), sep = "\n")
     cat("\n")
 }
 ```
 
-## Authors and contributors
+## `r tr("Authors and contributors", "Autores y colaboradores")`
 
 ```{r authors, echo = FALSE, results = "asis"}
-roles <- c(aut = "author", cre = "maintainer", ctb = "contributor",
-           dtc = "data contributor", fnd = "funder")
+roles <- if (lang == "es") {
+    c(aut = "autor", cre = "mantenedor", ctb = "colaborador", dtc = "contribución de datos", fnd = "financiamiento")
+} else {
+    c(aut = "author", cre = "maintainer", ctb = "contributor", dtc = "data contributor", fnd = "funder")
+}
 people <- eval(parse(text = desc[, "Authors@R"]))
 for (p in people) {
     orcid <- p$comment[["ORCID"]]
@@ -205,37 +220,29 @@ for (p in people) {
 }
 ```
 
-## Acknowledgements
+## `r tr("Acknowledgements", "Agradecimientos")`
 
-This work was developed at the Instituto Nacional de Salud Pública (INSP),
-Mexico, in collaboration with the Centro Nacional de Programas Preventivos y
-Control de Enfermedades (CENAPRECE) of the Secretaría de Salud.
+`r tr("This work was developed at the Instituto Nacional de Salud Pública (INSP), Mexico, in collaboration with the Centro Nacional de Programas Preventivos y Control de Enfermedades (CENAPRECE) of the Secretaría de Salud.", "Este trabajo se desarrolló en el Instituto Nacional de Salud Pública (INSP), México, en colaboración con el Centro Nacional de Programas Preventivos y Control de Enfermedades (CENAPRECE) de la Secretaría de Salud.")`
 
-## Motivation
+## `r tr("Motivation", "Motivación")`
 
-`r pkg` was born from the need to support evidence-based decisions in the
-Vector-Borne Diseases (VBD) program of CENAPRECE of the Secretaría de Salud
-of Mexico.
+`r pkg_info$motivation`
 
-## Getting help
+## `r tr("Getting help", "Ayuda")`
 
-- Bugs and feature requests: open an
-  [issue](https://github.com/`r gh`/issues) with a minimal reproducible
-  example ([reprex](https://reprex.tidyverse.org)).
-- Questions: felipe.dzul.m@gmail.com
+- `r tr(paste0("Bugs and feature requests: open an [issue](https://github.com/", gh, "/issues) with a minimal reproducible example ([reprex](https://reprex.tidyverse.org))."), paste0("Errores y sugerencias: abre un [issue](https://github.com/", gh, "/issues) con un ejemplo mínimo reproducible ([reprex](https://reprex.tidyverse.org))."))`
+- `r tr("Questions", "Preguntas")`: <felipe.dzul.m@gmail.com>
 
-## Disclaimer
+```{r disclaimer, echo = FALSE, results = "asis"}
+if (isTRUE(pkg_info$disclaimer)) {
+    cat("##", tr("Disclaimer", "Aviso"), "\n\n")
+    cat(tr(paste0("The datasets in ", pkg, " are derived from public sources and are provided for research and public-health purposes. They are not an official product of the original institutions; please check the original sources for official figures."),
+           paste0("Las bases de datos de ", pkg, " provienen de fuentes públicas y se ofrecen con fines de investigación y salud pública. No son un producto oficial de las instituciones de origen; consulta las fuentes originales para las cifras oficiales.")), "\n\n")
+}
+```
 
-The datasets in `r pkg` are derived from public sources and are provided
-for research and public-health purposes. They are not an official product
-of the original institutions; please check the original sources for
-official figures.
+## `r tr("License", "Licencia")`
 
-## License
+MIT © `r format(Sys.Date(), "%Y")` Felipe Antonio Dzul Manzanilla. `r tr("See", "Ver")` [LICENSE.md](LICENSE.md).
 
-MIT © `r format(Sys.Date(), "%Y")` Felipe Antonio Dzul Manzanilla. See
-[LICENSE.md](LICENSE.md).
-
-Please note that this project is released with a
-[Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
-By participating in this project you agree to abide by its terms.
+`r tr("Please note that this project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By participating in this project you agree to abide by its terms.", "Este proyecto se publica con un [Código de Conducta para colaboradores](https://www.contributor-covenant.org/es/version/2/1/code_of_conduct/). Al participar en este proyecto aceptas cumplir sus términos.")`

@@ -1,6 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+**English** · [Español](README.es.md)
+
 # popmex <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 <!-- badges: start -->
@@ -40,7 +42,7 @@ of dengue and other *Aedes*-borne diseases in Mexico.
 | [`pop2010`](https://fdzul.github.io/popmex/reference/pop2010.html)         | Population by municipality of Mexico, ITER 2010                | [link](https://www.inegi.org.mx/app/scitel/Default?ev=9)                                                                         |
 | [`pop2020`](https://fdzul.github.io/popmex/reference/pop2020.html)         | Population by municipality of Mexico, ITER 2020                | [link](https://www.inegi.org.mx/app/scitel/Default?ev=9)                                                                         |
 
-See the full description of each dataset with `?dataset_name`.
+See the full description of each dataset with `?name`.
 
 ## Main functions
 
