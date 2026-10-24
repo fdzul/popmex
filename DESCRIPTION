@@ -41,8 +41,13 @@ Suggests:
     knitr,
     leafsync,
     mapview,
+    mapgl,
+    viridis,
+    viridisLite,
     patchwork,
     rmarkdown,
+    terra,
+    tidyterra
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Imports:

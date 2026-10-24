@@ -186,6 +186,8 @@ Functions to reach the goal of the package.
 
 - [`extract_pop()`](https://fdzul.github.io/popmex/reference/extract_pop.md)
   : Extract the population of a locality in 400 m H3 hexagons
+- [`get_landscan()`](https://fdzul.github.io/popmex/reference/get_landscan.md)
+  : Download the LandScan population raster of Mexico
 
 # Articles
 

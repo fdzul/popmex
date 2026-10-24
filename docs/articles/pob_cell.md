@@ -19,9 +19,7 @@ where people live and how they move.
 
 ``` r
 
-lyrs <- terra::rast(system.file("extdata",
-                                  "pop_LandScan.tif",
-                                  package = "popmex"))
+lyrs <- popmex::get_landscan()
 names(lyrs)
 #>  [1] "pop_2000" "pop_2001" "pop_2002" "pop_2003" "pop_2004" "pop_2005"
 #>  [7] "pop_2006" "pop_2007" "pop_2008" "pop_2009" "pop_2010" "pop_2011"

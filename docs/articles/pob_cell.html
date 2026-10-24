@@ -94,9 +94,7 @@ they move.</p>
 <h3 id="load-the-layers">Load the layers<a class="anchor" aria-label="anchor" href="#load-the-layers"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">lyrs</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span>
-<span>                                  <span class="st">"pop_LandScan.tif"</span>,</span>
-<span>                                  package <span class="op">=</span> <span class="st">"popmex"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">lyrs</span> <span class="op">&lt;-</span> <span class="fu">popmex</span><span class="fu">::</span><span class="fu"><a href="../reference/get_landscan.html">get_landscan</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lyrs</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "pop_2000" "pop_2001" "pop_2002" "pop_2003" "pop_2004" "pop_2005"</span></span>
 <span><span class="co">#&gt;  [7] "pop_2006" "pop_2007" "pop_2008" "pop_2009" "pop_2010" "pop_2011"</span></span>

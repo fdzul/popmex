@@ -26,9 +26,7 @@ In the official homepage of [LandScan](https://landscan.ornl.gov), is defined as
 ### Load the layers
 
 ```{r}
-lyrs <- terra::rast(system.file("extdata",
-                                  "pop_LandScan.tif",
-                                  package = "popmex"))
+lyrs <- popmex::get_landscan()
 names(lyrs)
 ```
 
