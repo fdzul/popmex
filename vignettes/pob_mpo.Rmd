@@ -38,7 +38,7 @@ Map
 library(sf)
 # Step 1. extract the dataset ####
 pop2000 <- popmex::pop2000 |>
-    dplyr::select(CVEGEO, pobtot)
+    dplyr::select(CVEGEO, pobtot) 
 
 
 
@@ -46,7 +46,8 @@ pop2000 <- popmex::pop2000 |>
 pop2000 <- dplyr::left_join(x = rgeomex::AGEM_inegi19_mx, 
                             y = pop2000,
                             by = "CVEGEO") |>
-    dplyr::select(-NOMGEO)
+    dplyr::select(-NOMGEO) |>
+  dplyr::filter(CVE_ENT == "16")
 
 
 
@@ -94,61 +95,6 @@ gtExtras::gt_plt_summary(popmex::pop2010, title = "Total population from the 201
 ```
 
 
-Map
-
-```{r pop-map-inegi-2010}
-library(sf)
-# Step 1. extract the dataset ####
-pop2010 <- popmex::pop2010 |>
-    dplyr::select(CVEGEO, pobtot)
-
-
-
-# Step 2. Incorporate total population into the geographic information ####
-pop2010 <- dplyr::left_join(x = rgeomex::AGEM_inegi19_mx, 
-                            y = pop2010,
-                            by = "CVEGEO") |>
-    dplyr::select(-NOMGEO)
-
-
-
-# Step 3. create the automatic continuous scale with equal breaks ####
-continuous_scale <- mapgl::interpolate_palette(data = pop2010 ,
-                                               column = "pobtot",
-                                               method = "equal",
-                                               n =5,
-                                               palette = viridisLite::plasma)
-
-
-
-# Step 4. visualization #####
-mapgl::maplibre(style  = mapgl::carto_style("positron"),
-                bounds = sf::st_bbox(pop2010)) |>
-    mapgl::add_source("mpo", data = pop2010) |>
-    mapgl::add_line_layer(id = "mpo-borde",
-                          source     = "mpo",
-                          line_color = "white",
-                          line_width = 0.5) |>
-    mapgl::add_fill_layer(id = "mpo_mex",
-                          source = "mpo",
-                          fill_outline_color = "white",
-                          fill_color = continuous_scale$expression,
-                          fill_opacity = 0.8) |>
-    mapgl::add_legend("Population 2010",
-                      values = mapgl::get_legend_labels(continuous_scale, 
-                                                        digits = 0),
-                      colors = mapgl::get_legend_colors(continuous_scale),
-                      type = "continuous",
-                      position = "bottom-left",
-                      draggable = TRUE,
-                      collapsible = FALSE,
-                      collapsed = TRUE) |>
-    mapgl::add_fullscreen_control(position = "top-left") |> 
-    mapgl::add_navigation_control() |>
-    mapgl::add_globe_control() |>
-    mapgl::add_scale_control()
-```
-
 
 ####  Population 2020
 
@@ -156,61 +102,6 @@ mapgl::maplibre(style  = mapgl::carto_style("positron"),
 gtExtras::gt_plt_summary(popmex::pop2020, title = "Total population from the 2020 Census")
 ```
 
-
-Map
-
-```{r pop-map-inegi-2020}
-library(sf)
-# Step 1. extract the dataset ####
-pop2020 <- popmex::pop2020 |>
-    dplyr::select(CVEGEO, pobtot)
-
-
-
-# Step 2. Incorporate total population into the geographic information ####
-pop2020 <- dplyr::left_join(x = rgeomex::AGEM_inegi19_mx, 
-                            y = pop2020,
-                            by = "CVEGEO") |>
-    dplyr::select(-NOMGEO)
-
-
-
-# Step 3. create the automatic continuous scale with equal breaks ####
-continuous_scale <- mapgl::interpolate_palette(data = pop2020 ,
-                                               column = "pobtot",
-                                               method = "equal",
-                                               n =5,
-                                               palette = viridisLite::plasma)
-
-
-
-# Step 4. visualization #####
-mapgl::maplibre(style  = mapgl::carto_style("positron"),
-                bounds = sf::st_bbox(pop2020)) |>
-    mapgl::add_source("mpo", data = pop2020) |>
-    mapgl::add_line_layer(id = "mpo-borde",
-                          source     = "mpo",
-                          line_color = "white",
-                          line_width = 0.5) |>
-    mapgl::add_fill_layer(id = "mpo_mex",
-                          source = "mpo",
-                          fill_outline_color = "white",
-                          fill_color = continuous_scale$expression,
-                          fill_opacity = 0.8) |>
-    mapgl::add_legend("Population 2020",
-                      values = mapgl::get_legend_labels(continuous_scale, 
-                                                        digits = 0),
-                      colors = mapgl::get_legend_colors(continuous_scale),
-                      type = "continuous",
-                      position = "bottom-left",
-                      draggable = TRUE,
-                      collapsible = FALSE,
-                      collapsed = TRUE) |>
-    mapgl::add_fullscreen_control(position = "top-left") |> 
-    mapgl::add_navigation_control() |>
-    mapgl::add_globe_control() |>
-    mapgl::add_scale_control()
-```
 
 
 ## CONAPO
@@ -233,7 +124,8 @@ pop25 <- popmex::conapop |>
 pop2025 <- dplyr::left_join(x = rgeomex::AGEM_inegi19_mx, 
                             y = pop25,
                             by = c("CVEGEO" = "cvegeo")) |>
-    dplyr::select(-NOMGEO)
+    dplyr::select(-NOMGEO) |>
+  dplyr::filter(CVE_ENT == "16")
 
 
 

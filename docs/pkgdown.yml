@@ -2,8 +2,10 @@ pandoc: '3.10'
 pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
+  pob_cell: pob_cell.html
+  pob_mpo: pob_mpo.html
   pop_urban_city: pop_urban_city.html
-last_built: 2026-10-23T20:03Z
+last_built: 2026-10-24T02:16Z
 urls:
   reference: https://fdzul.github.io/popmex/reference
   article: https://fdzul.github.io/popmex/articles

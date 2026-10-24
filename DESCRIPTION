@@ -34,7 +34,6 @@ BugReports: https://github.com/fdzul/popmex/issues
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.5)
-RoxygenNote: 7.3.3
 Suggests:
     cowplot,
     ggplot2,
@@ -52,3 +51,4 @@ Imports:
 Remotes: fdzul/rgeomex
 LazyDataCompression: xz
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.0

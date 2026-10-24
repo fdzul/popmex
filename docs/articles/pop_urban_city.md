@@ -3,6 +3,7 @@
 ``` r
 
 library(popmex)
+library(mapview)
 ```
 
 The visualization of the population of an urban city is carried out in
@@ -44,7 +45,7 @@ pop_map <- function(data, title, location = "bl") {
 }
 
 library(patchwork)
-pop_map(x, "2023") | pop_map(y, "2022")
+pop_map(data = x, title = "2023") | pop_map(data = y, title = "2022")
 ```
 
 ![](pop_urban_city_files/figure-html/guadalajara-static-1.png)
