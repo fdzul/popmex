@@ -27,7 +27,8 @@ Description: Population datasets of Mexico for epidemiological analysis
     group (INEGI ITER 2000, 2010 and 2020), municipal population
     reconstructions and projections 1990-2040 (CONAPO), and population in
     400 m H3 hexagons (Kontur, Humanitarian Data Exchange, 2021-2023), with a
-    function to extract the hexagons of urban localities.
+    function to extract the hexagons of urban localities, and a function to
+    download the LandScan Global population raster (1 km) on demand.
 License: MIT + file LICENSE
 URL: https://github.com/fdzul/popmex, https://fdzul.github.io/popmex/
 BugReports: https://github.com/fdzul/popmex/issues
@@ -36,19 +37,21 @@ LazyData: true
 Depends: R (>= 3.5)
 Suggests:
     cowplot,
+    dplyr,
     ggplot2,
     ggspatial,
+    gtExtras,
     knitr,
     leafsync,
-    mapview,
     mapgl,
-    viridis,
-    viridisLite,
+    mapview,
     patchwork,
     rmarkdown,
     terra,
-    tidyterra
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    tidyterra,
+    viridis,
+    viridisLite
 VignetteBuilder: knitr
 Imports:
     rgeomex,
