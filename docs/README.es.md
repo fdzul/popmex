@@ -17,9 +17,11 @@ vive la población en las localidades urbanas.
 La población es el denominador de toda tasa y la exposición de todo
 modelo espacial. popmex reúne en un solo lugar la población censal por
 municipio, sexo y grupo de edad (INEGI 2000, 2010 y 2020), las
-reconstrucciones y proyecciones de CONAPO 1990-2040 y la población en
+reconstrucciones y proyecciones de CONAPO 1990-2040 la población en
 hexágonos H3 de 400 m (Kontur 2021-2023) para trabajar al interior de
-las ciudades.
+las ciudades, y el raster de población LandScan Global (1 km), que se
+descarga cuando se necesita con
+[`get_landscan()`](https://fdzul.github.io/popmex/reference/get_landscan.md).
 
 popmex forma parte del [**dengueverse**](https://fdzul.r-universe.dev),
 una familia de paquetes de R para la vigilancia, el análisis espacial y
@@ -45,6 +47,7 @@ Consulta la descripción completa de cada base con `?nombre`.
 | Función | Descripción |
 |:---|:---|
 | [`extract_pop()`](https://fdzul.github.io/popmex/reference/extract_pop.html) | Extract the population of a locality in 400 m H3 hexagons |
+| [`get_landscan()`](https://fdzul.github.io/popmex/reference/get_landscan.html) | Download the LandScan population raster of Mexico |
 
 ## Instalación
 
@@ -95,6 +98,17 @@ Hay ejemplos más completos en los
   `pop2010`, `pop2020`),
   [INEGI](https://www.inegi.org.mx/app/scitel/Default?ev=9). Columnas de
   población convertidas a numéricas; totales verificados contra INEGI.
+- **LandScan Global**
+  ([`get_landscan()`](https://fdzul.github.io/popmex/reference/get_landscan.md)),
+  [Oak Ridge National Laboratory](https://landscan.ornl.gov), resolución
+  de 1 km. Licencia: CC BY 4.0. El raster no se instala con el paquete:
+  está publicado como archivo del [release
+  `landscan-data`](https://github.com/fdzul/popmex/releases/tag/landscan-data)
+  y se descarga, una sola vez, la primera vez que se llama a
+  [`get_landscan()`](https://fdzul.github.io/popmex/reference/get_landscan.md).
+  Cita la edición de LandScan que uses (p. ej. Sims K, et al. (2023).
+  *LandScan Global 2022* \[Data set\]. Oak Ridge National Laboratory.
+  <https://doi.org/10.48690/1529167>).
 - **Reconstrucción y proyecciones de la población de los municipios de
   México 1990-2040** (`conapop`),
   [CONAPO](https://www.gob.mx/conapo/documentos/reconstruccion-y-proyecciones-de-la-poblacion-de-los-municipios-de-mexico-1990-2040).
@@ -107,12 +121,10 @@ Los scripts de procesamiento están en
 Si usas popmex en una publicación, por favor cítalo:
 
 ``` R
-Warning in person1(given = given[[i]], family = family[[i]], middle =
-middle[[i]], : Invalid ORCID iD: '//orcid.org/0000-0002-9156-5669'.
-Dzul Manzanilla F, Cruz López C, Morales García E (2026). _popmex:
-Population Density Mexico_. R package version 0.1.0, commit
-5987a7efc6941ba5bf3114f7f55cf3c6326fdd6c,
-<https://github.com/fdzul/popmex>.
+Dzul Manzanilla F, Correa-Morales F, Cruz López C, Morales García E
+(2026). _popmex: Population Datasets of Mexico at Municipal and Hexagon
+Resolution_. R package version 0.2.0,
+<https://fdzul.r-universe.dev/popmex>.
 ```
 
 ## Autores y colaboradores

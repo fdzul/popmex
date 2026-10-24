@@ -47,12 +47,12 @@
 <div class="section level2">
 <h2 id="descripción-general">Descripción general<a class="anchor" aria-label="anchor" href="#descripci%C3%B3n-general"></a></h2>
 <p>popmex ofrece bases de datos de población de México a nivel municipal y en hexágonos de 400 m, para calcular tasas de incidencia y mapear dónde vive la población en las localidades urbanas.</p>
-<p>La población es el denominador de toda tasa y la exposición de todo modelo espacial. popmex reúne en un solo lugar la población censal por municipio, sexo y grupo de edad (INEGI 2000, 2010 y 2020), las reconstrucciones y proyecciones de CONAPO 1990-2040 y la población en hexágonos H3 de 400 m (Kontur 2021-2023) para trabajar al interior de las ciudades.</p>
+<p>La población es el denominador de toda tasa y la exposición de todo modelo espacial. popmex reúne en un solo lugar la población censal por municipio, sexo y grupo de edad (INEGI 2000, 2010 y 2020), las reconstrucciones y proyecciones de CONAPO 1990-2040 la población en hexágonos H3 de 400 m (Kontur 2021-2023) para trabajar al interior de las ciudades, y el raster de población LandScan Global (1 km), que se descarga cuando se necesita con <code><a href="reference/get_landscan.html">get_landscan()</a></code>.</p>
 <p>popmex forma parte del <a href="https://fdzul.r-universe.dev" class="external-link"><strong>dengueverse</strong></a>, una familia de paquetes de R para la vigilancia, el análisis espacial y el control del dengue y otras enfermedades transmitidas por <em>Aedes</em> en México.</p>
 </div>
 <div class="section level2">
 <h2 id="bases-de-datos">Bases de datos<a class="anchor" aria-label="anchor" href="#bases-de-datos"></a></h2>
-<table class="table"><colgroup><col width="33%"><col width="33%"><col width="33%"></colgroup><thead><tr><th align="left">Base de datos</th>
+<table class="table"><colgroup><col width="28%"><col width="23%"><col width="48%"></colgroup><thead><tr><th align="left">Base de datos</th>
 <th align="left">Descripción</th>
 <th align="left">Fuente</th>
 </tr></thead><tbody><tr><td align="left"><a href="https://fdzul.github.io/popmex/reference/conapop.html"><code>conapop</code></a></td>
@@ -80,10 +80,12 @@
 </div>
 <div class="section level2">
 <h2 id="funciones-principales">Funciones principales<a class="anchor" aria-label="anchor" href="#funciones-principales"></a></h2>
-<table class="table"><colgroup><col width="50%"><col width="50%"></colgroup><thead><tr><th align="left">Función</th>
+<table class="table"><colgroup><col width="57%"><col width="42%"></colgroup><thead><tr><th align="left">Función</th>
 <th align="left">Descripción</th>
 </tr></thead><tbody><tr><td align="left"><a href="https://fdzul.github.io/popmex/reference/extract_pop.html"><code>extract_pop()</code></a></td>
 <td align="left">Extract the population of a locality in 400 m H3 hexagons</td>
+</tr><tr><td align="left"><a href="https://fdzul.github.io/popmex/reference/get_landscan.html"><code>get_landscan()</code></a></td>
+<td align="left">Download the LandScan population raster of Mexico</td>
 </tr></tbody></table></div>
 <div class="section level2">
 <h2 id="instalación">Instalación<a class="anchor" aria-label="anchor" href="#instalaci%C3%B3n"></a></h2>
@@ -118,18 +120,18 @@
 <li>
 <strong>ITER, Censos de Población y Vivienda 2000, 2010 y 2020</strong> (<code>pop2000</code>, <code>pop2010</code>, <code>pop2020</code>), <a href="https://www.inegi.org.mx/app/scitel/Default?ev=9" class="external-link">INEGI</a>. Columnas de población convertidas a numéricas; totales verificados contra INEGI.</li>
 <li>
+<strong>LandScan Global</strong> (<code><a href="reference/get_landscan.html">get_landscan()</a></code>), <a href="https://landscan.ornl.gov" class="external-link">Oak Ridge National Laboratory</a>, resolución de 1 km. Licencia: CC BY 4.0. El raster no se instala con el paquete: está publicado como archivo del <a href="https://github.com/fdzul/popmex/releases/tag/landscan-data" class="external-link">release <code>landscan-data</code></a> y se descarga, una sola vez, la primera vez que se llama a <code><a href="reference/get_landscan.html">get_landscan()</a></code>. Cita la edición de LandScan que uses (p. ej. Sims K, et al. (2023). <em>LandScan Global 2022</em> [Data set]. Oak Ridge National Laboratory. <a href="https://doi.org/10.48690/1529167" class="external-link uri">https://doi.org/10.48690/1529167</a>).</li>
+<li>
 <strong>Reconstrucción y proyecciones de la población de los municipios de México 1990-2040</strong> (<code>conapop</code>), <a href="https://www.gob.mx/conapo/documentos/reconstruccion-y-proyecciones-de-la-poblacion-de-los-municipios-de-mexico-1990-2040" class="external-link">CONAPO</a>.</li>
 </ul><p>Los scripts de procesamiento están en <a href="https://github.com/fdzul/popmex/tree/main/data-raw" class="external-link"><code>data-raw/</code></a>.</p>
 </div>
 <div class="section level2">
 <h2 id="cómo-citar">Cómo citar<a class="anchor" aria-label="anchor" href="#c%C3%B3mo-citar"></a></h2>
 <p>Si usas popmex en una publicación, por favor cítalo:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>Warning <span class="cf">in</span> <span class="fu">person1</span>(<span class="at">given =</span> given[[i]], <span class="at">family =</span> family[[i]], <span class="at">middle =</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>middle[[i]], <span class="sc">:</span> Invalid ORCID iD<span class="sc">:</span> <span class="st">'//orcid.org/0000-0002-9156-5669'</span>.</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>Dzul Manzanilla F, Cruz López C, Morales García <span class="fu">E</span> (<span class="dv">2026</span>). _popmex<span class="sc">:</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>Population Density Mexico_. R package version <span class="dv">0</span>.<span class="fl">1.0</span>, commit</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="dv">5987</span>a7efc6941ba5bf3114f7f55cf3c6326fdd6c,</span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>fdzul<span class="sc">/</span>popmex<span class="sc">&gt;</span>.</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>Dzul Manzanilla F, Correa<span class="sc">-</span>Morales F, Cruz López C, Morales García E</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>(<span class="dv">2026</span>). _popmex<span class="sc">:</span> Population Datasets of Mexico at Municipal and Hexagon</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>Resolution_. R package version <span class="dv">0</span>.<span class="fl">2.0</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>fdzul.r<span class="sc">-</span>universe.dev<span class="sc">/</span>popmex<span class="sc">&gt;</span>.</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="autores-y-colaboradores">Autores y colaboradores<a class="anchor" aria-label="anchor" href="#autores-y-colaboradores"></a></h2>
