@@ -114,9 +114,8 @@ Processing scripts are in
 If you use popmex in a publication, please cite it:
 
 ``` R
-Dzul Manzanilla F, Correa-Morales F, Cruz López C, Morales García E
-(2026). _popmex: Population Datasets of Mexico at Municipal and Hexagon
-Resolution_. R package version 0.2.0,
+Dzul Manzanilla F, Correa-Morales F, Cruz López C, Morales García E (2026). _popmex: Population
+Datasets of Mexico at Municipal and Hexagon Resolution_. R package version 0.2.0,
 <https://fdzul.r-universe.dev/popmex>.
 ```
 

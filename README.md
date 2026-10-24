@@ -34,24 +34,24 @@ of dengue and other *Aedes*-borne diseases in Mexico.
 
 ## Datasets
 
-| Dataset                                                                    | Description                                                    | Source                                                                                                                           |
-|:---------------------------------------------------------------------------|:---------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| [`conapop`](https://fdzul.github.io/popmex/reference/conapop.html)         | Population of the municipalities of Mexico, 1990-2040 (CONAPO) | [link](https://www.gob.mx/conapo/documentos/reconstruccion-y-proyecciones-de-la-poblacion-de-los-municipios-de-mexico-1990-2040) |
-| [`hdx_pop2021`](https://fdzul.github.io/popmex/reference/hdx_pop2021.html) | Population in 400 m H3 hexagons of Mexico, 2021 (Kontur / HDX) | [link](https://data.humdata.org/dataset/kontur-population-mexico)                                                                |
-| [`hdx_pop2022`](https://fdzul.github.io/popmex/reference/hdx_pop2022.html) | Population in 400 m H3 hexagons of Mexico, 2022 (Kontur / HDX) | [link](https://data.humdata.org/dataset/kontur-population-mexico)                                                                |
-| [`hdx_pop2023`](https://fdzul.github.io/popmex/reference/hdx_pop2023.html) | Population in 400 m H3 hexagons of Mexico, 2023 (Kontur / HDX) | [link](https://data.humdata.org/dataset/kontur-population-mexico)                                                                |
-| [`pop2000`](https://fdzul.github.io/popmex/reference/pop2000.html)         | Population by municipality of Mexico, ITER 2000                | [link](https://www.inegi.org.mx/app/scitel/Default?ev=9)                                                                         |
-| [`pop2010`](https://fdzul.github.io/popmex/reference/pop2010.html)         | Population by municipality of Mexico, ITER 2010                | [link](https://www.inegi.org.mx/app/scitel/Default?ev=9)                                                                         |
-| [`pop2020`](https://fdzul.github.io/popmex/reference/pop2020.html)         | Population by municipality of Mexico, ITER 2020                | [link](https://www.inegi.org.mx/app/scitel/Default?ev=9)                                                                         |
+| Dataset | Description | Source |
+|:---|:---|:---|
+| [`conapop`](https://fdzul.github.io/popmex/reference/conapop.html) | Population of the municipalities of Mexico, 1990-2040 (CONAPO) | [link](https://www.gob.mx/conapo/documentos/reconstruccion-y-proyecciones-de-la-poblacion-de-los-municipios-de-mexico-1990-2040) |
+| [`hdx_pop2021`](https://fdzul.github.io/popmex/reference/hdx_pop2021.html) | Population in 400 m H3 hexagons of Mexico, 2021 (Kontur / HDX) | [link](https://data.humdata.org/dataset/kontur-population-mexico) |
+| [`hdx_pop2022`](https://fdzul.github.io/popmex/reference/hdx_pop2022.html) | Population in 400 m H3 hexagons of Mexico, 2022 (Kontur / HDX) | [link](https://data.humdata.org/dataset/kontur-population-mexico) |
+| [`hdx_pop2023`](https://fdzul.github.io/popmex/reference/hdx_pop2023.html) | Population in 400 m H3 hexagons of Mexico, 2023 (Kontur / HDX) | [link](https://data.humdata.org/dataset/kontur-population-mexico) |
+| [`pop2000`](https://fdzul.github.io/popmex/reference/pop2000.html) | Population by municipality of Mexico, ITER 2000 | [link](https://www.inegi.org.mx/app/scitel/Default?ev=9) |
+| [`pop2010`](https://fdzul.github.io/popmex/reference/pop2010.html) | Population by municipality of Mexico, ITER 2010 | [link](https://www.inegi.org.mx/app/scitel/Default?ev=9) |
+| [`pop2020`](https://fdzul.github.io/popmex/reference/pop2020.html) | Population by municipality of Mexico, ITER 2020 | [link](https://www.inegi.org.mx/app/scitel/Default?ev=9) |
 
 See the full description of each dataset with `?name`.
 
 ## Main functions
 
-| Function                                                                       | Description                                               |
-|:-------------------------------------------------------------------------------|:----------------------------------------------------------|
-| [`extract_pop()`](https://fdzul.github.io/popmex/reference/extract_pop.html)   | Extract the population of a locality in 400 m H3 hexagons |
-| [`get_landscan()`](https://fdzul.github.io/popmex/reference/get_landscan.html) | Download the LandScan population raster of Mexico         |
+| Function | Description |
+|:---|:---|
+| [`extract_pop()`](https://fdzul.github.io/popmex/reference/extract_pop.html) | Extract the population of a locality in 400 m H3 hexagons |
+| [`get_landscan()`](https://fdzul.github.io/popmex/reference/get_landscan.html) | Download the LandScan population raster of Mexico |
 
 ## Installation
 
@@ -119,9 +119,8 @@ Processing scripts are in
 
 If you use popmex in a publication, please cite it:
 
-    Dzul Manzanilla F, Correa-Morales F, Cruz López C, Morales García E
-    (2026). _popmex: Population Datasets of Mexico at Municipal and Hexagon
-    Resolution_. R package version 0.2.0,
+    Dzul Manzanilla F, Correa-Morales F, Cruz López C, Morales García E (2026). _popmex: Population
+    Datasets of Mexico at Municipal and Hexagon Resolution_. R package version 0.2.0,
     <https://fdzul.r-universe.dev/popmex>.
 
 ## Authors and contributors
