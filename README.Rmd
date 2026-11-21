@@ -120,7 +120,7 @@ tab_fun <- rd_table("functions")
 
 `r pkg_info$overview`
 
-`r tr(paste0(pkg, " is part of the [**dengueverse**](https://fdzul.r-universe.dev), a family of R packages for the surveillance, spatial analysis and control of dengue and other *Aedes*-borne diseases in Mexico."), paste0(pkg, " forma parte del [**dengueverse**](https://fdzul.r-universe.dev), una familia de paquetes de R para la vigilancia, el análisis espacial y el control del dengue y otras enfermedades transmitidas por *Aedes* en México."))`
+`r tr(paste0(pkg, " is part of the [**dengueverse**](https://fdzul.github.io/dengueverse/), a family of R packages for the surveillance, spatial analysis and control of dengue and other *Aedes*-borne diseases in Mexico."), paste0(pkg, " forma parte del [**dengueverse**](https://fdzul.github.io/dengueverse/es/), una familia de paquetes de R para la vigilancia, el análisis espacial y el control del dengue y otras enfermedades transmitidas por *Aedes* en México."))`
 
 ```{r datasets-section, echo = FALSE, results = "asis"}
 if (!is.null(tab_data)) {

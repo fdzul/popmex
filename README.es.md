@@ -28,7 +28,7 @@ hexágonos H3 de 400 m (Kontur 2021-2023) para trabajar al interior de
 las ciudades, y el raster de población LandScan Global (1 km), que se
 descarga cuando se necesita con `get_landscan()`.
 
-popmex forma parte del [**dengueverse**](https://fdzul.r-universe.dev),
+popmex forma parte del [**dengueverse**](https://fdzul.github.io/dengueverse/es/),
 una familia de paquetes de R para la vigilancia, el análisis espacial y
 el control del dengue y otras enfermedades transmitidas por *Aedes* en
 México.
